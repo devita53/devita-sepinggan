@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dusun Sepinggan Gelik — Sejarah</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif; scroll-behavior:smooth;}
+        :root{
+            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
+            --biru-cerah:#69b1ff; --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+        }
+        body{background:var(--biru-muda); color:var(--teks); line-height:1.9;}
+        header{background:linear-gradient(135deg,var(--biru-tua),var(--biru-med)); color:var(--putih); padding:1rem 5%; position:sticky; top:0; z-index:999; box-shadow:0 2px 12px rgba(0,0,0,.15);}
+        .nav{max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; position:relative;}
+        .logo{font-size:1.3rem; font-weight:700;}
+        .menu-toggle{display:none; font-size:1.8rem; cursor:pointer; padding:.3rem .8rem; border-radius:6px; background:rgba(255,255,255,.15);}
+        nav ul{display:flex; list-style:none; gap:1.3rem; flex-wrap:wrap;}
+        nav a{color:var(--putih); text-decoration:none; font-weight:500; padding:.5rem 0; border-bottom:2px solid transparent; transition:.3s;}
+        nav a:hover, nav a.active{border-bottom:2px solid var(--putih);}
+        section{max-width:1200px; margin:0 auto; padding:3.5rem 5%;}
+        h2{text-align:center; color:var(--biru-tua); font-size:2rem; margin-bottom:2rem; padding-top:1rem;}
+        h2::after{content:''; display:block; width:90px; height:4px; background:var(--biru-med); margin:.6rem auto 0; border-radius:2px;}
+        .card{background:var(--putih); border-radius:14px; padding:2rem; box-shadow:0 5px 18px rgba(43,125,233,.13); margin-bottom:1.5rem;}
+        .pemisah{height:3px; background:linear-gradient(to right,transparent,var(--biru-med),transparent); border:none; margin:2.5rem auto; max-width:650px;}
+        footer{background:var(--biru-tua); color:var(--putih); text-align:center; padding:2.2rem 5%; margin-top:2rem;}
+        
+        @media(max-width:768px){
+            .menu-toggle{display:block;}
+            nav ul{position:absolute; top:100%; left:0; right:0; flex-direction:column; background:var(--biru-tua); padding:1.2rem 1.5rem; gap:1rem; display:none; border-radius:0 0 14px 14px; box-shadow:0 8px 16px rgba(0,0,0,.15); z-index:998;}
+            nav ul.active{display:flex;}
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="logo">🏡 Sepinggan Gelik</div>
+        <nav>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+            <ul id="navMenu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="sejarah.html" class="active">Sejarah</a></li>
+                <li><a href="potensi.html">Potensi</a></li>
+                <li><a href="kegiatan.html">Kegiatan & Galeri</a></li>
+                <li><a href="kontak.html">Pesan & Kontak</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section>
+    <h2>📜 Sejarah & Asal Usul Dusun</h2>
+    <div class="card">
+        <p>Nama <strong>"Sepinggan Gelik"</strong> bukanlah nama yang diberikan begitu saja, melainkan memiliki cerita dan makna yang diwariskan dari generasi ke generasi leluhur kami. Nama ini diambil dari ciri khas alam setempat — adanya pohon dan kondisi wilayah yang menjadi pembeda yang melekat sejak lama di hati masyarakat.</p>
+        <br>
+        <p>Sejak puluhan tahun silam, nenek moyang kami memilih menetap di tanah ini karena tanahnya yang subur, airnya yang melimpah, serta letaknya yang strategis namun tetap aman dan damai. Dari sekian rumah yang berdiri berderet, tumbuhlah pemukiman yang makin lama makin berkembang menjadi dusun yang kita kenal sekarang. Dari hutan yang dibuka menjadi ladang dan sawah, dari jalan setapak yang kini makin terbuka lebar — semua ini adalah hasil kerja keras dan kebersamaan para pendahulu kami.</p>
+        <br>
+        <p>Para pendatang awal yang membuka hutan menjadi ladang dan sawah adalah orang-orang yang tekun dan berjiwa besar. Mereka membuka jalan, membangun rumah, dan menanam harapan demi masa depan anak cucu mereka. Semangat kerja keras dan kebersamaan inilah yang menjadi fondasi kokoh dusun kami hingga hari ini — semangat yang tak boleh pudar dimakan waktu.</p>
+        <br>
+        <p>Dari hutan belantara yang dulu sunyi, kini tumbuh hamparan sawah yang menghijau, rumah-rumah berdiri rapi, masjid menjadi penanda arah kehidupan, dan sekolah menjadi jendela masa depan generasi muda. Semua ini bukan datang dengan sendirinya, melainkan hasil keringat dan doa tulus para pendahulu kami yang kami hormati dan syukuri setiap hari.</p>
+    </div>
+</section>
+
+<hr class="pemisah">
+
+<footer>
+    <p><strong>&copy; 2026 Dusun Sepinggan Gelik</strong></p>
+    <p>Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Kalimantan Barat — Kode Pos 79453</p>
+</footer>
+
+<script>
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>
