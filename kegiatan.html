@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dusun Sepinggan Gelik — Kegiatan & Galeri</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif; scroll-behavior:smooth;}
+        :root{
+            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
+            --biru-cerah:#69b1ff; --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+        }
+        body{background:var(--biru-muda); color:var(--teks); line-height:1.9;}
+        header{background:linear-gradient(135deg,var(--biru-tua),var(--biru-med)); color:var(--putih); padding:1rem 5%; position:sticky; top:0; z-index:999; box-shadow:0 2px 12px rgba(0,0,0,.15);}
+        .nav{max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; position:relative;}
+        .logo{font-size:1.3rem; font-weight:700;}
+        .menu-toggle{display:none; font-size:1.8rem; cursor:pointer; padding:.3rem .8rem; border-radius:6px; background:rgba(255,255,255,.15);}
+        nav ul{display:flex; list-style:none; gap:1.3rem; flex-wrap:wrap;}
+        nav a{color:var(--putih); text-decoration:none; font-weight:500; padding:.5rem 0; border-bottom:2px solid transparent; transition:.3s;}
+        nav a:hover, nav a.active{border-bottom:2px solid var(--putih);}
+        section{max-width:1200px; margin:0 auto; padding:3.5rem 5%;}
+        h2{text-align:center; color:var(--biru-tua); font-size:2rem; margin-bottom:2rem; padding-top:1rem;}
+        h2::after{content:''; display:block; width:90px; height:4px; background:var(--biru-med); margin:.6rem auto 0; border-radius:2px;}
+        .card{background:var(--putih); border-radius:14px; padding:2rem; box-shadow:0 5px 18px rgba(43,125,233,.13); margin-bottom:1.5rem;}
+        .galeri-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.8rem;}
+        .galeri-card{background:var(--putih); border-radius:14px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,.09); transition:transform .3s ease;}
+        .galeri-card:hover{transform:translateY(-7px);}
+        .galeri-card img{width:100%; height:220px; object-fit:cover; background:var(--abu-lembut);}
+        .galeri-card p{padding:1.3rem; text-align:left; line-height:1.8; color:var(--teks);}
+        .pemisah{height:3px; background:linear-gradient(to right,transparent,var(--biru-med),transparent); border:none; margin:2.5rem auto; max-width:650px;}
+        footer{background:var(--biru-tua); color:var(--putih); text-align:center; padding:2.2rem 5%; margin-top:2rem;}
+        
+        @media(max-width:768px){
+            .menu-toggle{display:block;}
+            nav ul{position:absolute; top:100%; left:0; right:0; flex-direction:column; background:var(--biru-tua); padding:1.2rem 1.5rem; gap:1rem; display:none; border-radius:0 0 14px 14px; box-shadow:0 8px 16px rgba(0,0,0,.15); z-index:998;}
+            nav ul.active{display:flex;}
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="logo">🏡 Sepinggan Gelik</div>
+        <nav>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+            <ul id="navMenu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="sejarah.html">Sejarah</a></li>
+                <li><a href="potensi.html">Potensi</a></li>
+                <li><a href="kegiatan.html" class="active">Kegiatan & Galeri</a></li>
+                <li><a href="kontak.html">Pesan & Kontak</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section>
+    <h2>🤝 Kehidupan Bersama & Kegiatan Warga</h2>
+
+    <div class="card">
+        <h3>🛠️ Gotong Royong — Warisan Mulia Leluhur</h3>
+        <p>"Berat sama dipikul, ringan sama dijinjing" — pepatah ini benar-benar hidup di tengah masyarakat kami. Secara berkala, warga berkumpul untuk membersihkan jalan, merapikan tepian sungai dan saluran air, memperbaiki saluran irigasi, atau membantu tetangga yang sedang membangun rumah. Tanpa diminta, tanpa dibayar — semata-mata karena rasa persaudaraan yang tulus.</p>
+        <p>Di tengah dunia yang makin individualis, kami ingin tetap menjaga budaya ini — karena kami sadar, hidup saling membantu akan membuat beban menjadi ringan dan sukacita menjadi berlipat ganda.</p>
+    </div>
+
+    <div class="card">
+        <h3>🛡️ Menjaga Keamanan Bersama</h3>
+        <p>Keamanan dan ketertiban lingkungan bukan hanya tugas aparat, melainkan tanggung jawab seluruh warga. Melalui Pos Satkamling Bersatu Desa Sepinggan, warga secara bergilir menjaga keamanan lingkungan, bekerja sama dengan pihak berwenang agar suasana dusun tetap aman, damai, dan kondusif setiap saat.</p>
+        <p>Semangat saling menjaga ini membuat setiap warga merasa tenang dan terlindungi — anak-anak bisa bermain dengan leluasa, dan warga bisa beristirahat dengan tenang di rumahnya masing-masing.</p>
+    </div>
+
+    <div class="card">
+        <h3>🏥 Pelayanan Kesehatan & Kesejahteraan Keluarga</h3>
+        <p>Posyandu menjadi pusat pelayanan kesehatan dasar yang sangat berarti bagi warga, terutama bagi ibu dan balita. Di sini dilakukan penimbangan, imunisasi, serta penyuluhan kesehatan yang bermanfaat bagi keluarga. Kader kesehatan bekerja dengan penuh dedikasi dan sukarela menjadi garda terdepan dalam menjaga kesehatan keluarga di dusun kami.</p>
+        <p>Semoga ke depannya pelayanan semakin baik dan fasilitas semakin lengkap, agar setiap warga bisa hidup sehat dan kuat — karena kesehatan adalah modal utama dalam menapaki kehidupan.</p>
+    </div>
+
+    <div class="card">
+        <h3>🕌 Keagamaan & Kegiatan Spiritual</h3>
+        <p>Masjid bukan sekadar tempat ibadah, melainkan jantung kehidupan masyarakat kami. Di sini kami berkumpul untuk shalat berjamaah, belajar mengaji, mengikuti pengajian rutin ibu-ibu dan bapak-bapak, serta merayakan hari-hari besar keagamaan dengan penuh kekeluargaan.</p>
+        <p>Nilai-nilai agama menjadi kompas arah kehidupan kami — jujur dalam bekerja, baik kepada sesama, sayang kepada anak yatim, hormat kepada orang tua, dan peduli kepada tetangga. Semoga kebaikan ini terus tumbuh di hati setiap generasi.</p>
+    </div>
+
+    <div class="card">
+        <h3>🎉 Perayaan & Hiburan Warga</h3>
+        <p>Hari-hari besar nasional maupun keagamaan selalu dirayakan dengan penuh sukacita dan kebersamaan. Anak-anak berbaris dengan ceria, bendera berkibar di depan rumah, dan lapangan menjadi tempat berkumpulnya warga dari muda hingga yang lanjut usia. Lomba-lomba sederhana seperti makan kerupuk, tarik tambang, dan bola voli selalu disambut dengan antusiasme yang luar biasa.</p>
+        <p>Tawa dan sorak-sorai anak-anak dusun menjadi warna yang memperindah kehidupan kami — bukan karena kemewahan, tapi karena kebersamaan yang tulus di antara kami.</p>
+    </div>
+</section>
+
+<hr class="pemisah">
+
+<section>
+    <h2>📸 Galeri Kenangan & Dokumentasi Warga</h2>
+    <p style="text-align:center; max-width:750px; margin:0 auto 2rem;">Setiap foto yang tersimpan di sini bukan sekadar gambar biasa — ia adalah cerita yang terhening dalam bingkai, momen yang pernah terjadi, dan kenangan yang patut dijaga untuk diceritakan kembali kepada generasi mendatang. Mari simak kisah di balik setiap foto kami:</p>
+
+    <div class="galeri-grid">
+        <div class="galeri-card">
+            <img src="kantor-desa.jpeg" alt="Kantor Dusun Sepinggan Gelik">
+            <p><strong>🏢 Kantor Dusun — Pusat Pelayanan Warga</strong><br>Di sinilah segala urusan administrasi warga dikelola dengan sebaik-baiknya. Mulai dari surat-menyurat, perencanaan kegiatan dusun, hingga menerima saran dan aspirasi dari masyarakat. Kantor ini bukan sekadar bangunan berdinding tembok, melainkan rumah kedua tempat warga merasa didengar dan dilayani dengan tulus hati. Pengurus dusun bekerja sekuat tenaga agar pelayanan berjalan lancar, transparan, dan bermanfaat bagi setiap keluarga yang tinggal di wilayah Sepinggan Gelik.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="masjid-mujahadah.jpeg" alt="Masjid Mujahadah Sepinggan Gelik">
+            <p><strong>🕌 Masjid Mujahadah — Cahaya Penyejuk Jiwa</strong><br>Menara masjid yang menjulang menjadi penanda arah kehidupan spiritual warga kami. Di sini hati yang lelah beristirahat, masalah yang berat dibawa dalam doa, dan harapan-harapan dipanjatkan kepada Sang Pencipta. Masjid ini berdiri kokoh bukan hanya karena fondasi yang kuat, melainkan karena kebersamaan dan ketakwaan warga yang merawatnya dengan penuh cinta. Di sinilah kami belajar menjadi manusia yang lebih baik setiap harinya — jujur dalam perkataan, baik dalam perbuatan, dan peduli kepada sesama makhluk.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="sawah-pemandangan.jpeg" alt="Pemandangan Sawah Sepinggan Gelik">
+            <p><strong>🌾 Hamparan Sawah — Hadiah Terindah dari Alam</strong><br>Jika Anda berkunjung ke Sepinggan Gelik, pemandangan pertama yang menyapa mata adalah hamparan sawah yang hijau membentang sejauh mata memandang. Di pagi hari saat embun masih menempel di daun padi, sinar matahari yang baru terbit memantul bagai permata yang bertaburan. Udara yang sejuk dan pemandangan yang menenangkan ini adalah kekayaan yang tak ternilai harganya bagi kami — bukti kasih sayang Tuhan yang selalu menyuburkan tanah tempat kami mencari nafkah setiap hari.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="saluran-air-jalan-dusun.jpeg" alt="Saluran Air dan Jalan Dusun Sepinggan Gelik">
+            <p><strong>🌊 Saluran Air & Jalan — Menuju Kehidupan yang Lebih Baik</strong><br>Inilah pemandangan khas yang menyapa siapa pun yang melintas di wilayah dusun kami — di sisi jalan terdapat saluran air yang jernih mengalir tenang membelah pemukiman warga. Di sepanjang aliran air ini tumbuh pepohonan rindang seperti pohon kelapa dan sawit yang meneduhkan suasana. Jalan yang terus kami perbaiki dan perlebar bukan sekadar jalan aspal atau tanah, melainkan jalan penghubung antarwarga, jalan menuju pasar, jalan ke sekolah, dan jalan yang membawa kami semua melangkah menuju masa depan yang lebih cerah dan sejahtera bersama-sama.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="posyandu-durian-sepinggan-gelik.jpeg" alt="Posyandu Durian Sepinggan Gelik">
+            <p><strong>🏥 Posyandu Durian — Menjaga Kesehatan dari Rumah</strong><br>Bangunan ini adalah Posyandu yang menjadi pusat pelayanan kesehatan dasar bagi warga, khususnya ibu dan balita. Di sini bayi ditimbang, anak-anak mendapatkan imunisasi, dan ibu-ibu mendapatkan penyuluhan kesehatan yang bermanfaat. Nama "Durian" diambil dari nama dusun atau wilayah tempat posyandu ini berada — sebuah identitas yang melekat dan dibanggakan warga. Kader-kader kesehatan yang bertugas di sini bekerja dengan penuh ketulusan dan semangat pengabdian, meski fasilitas sederhana, keikhlasan hati mereka tak ternilai harganya.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="kebun-terong-putih-warga.jpeg" alt="Kebun Terong Putih Warga Sepinggan Gelik">
+            <p><strong>🍆 Kebun Terong Putih — Potensi Sayuran yang Menjanjikan</strong><br>Lihatlah hamparan kebun terong putih yang tumbuh subur di lahan pertanian warga. Tanaman ini belakangan mulai banyak dibudidayakan karena masa panennya yang relatif cepat dan permintaan pasar yang terus meningkat. Dengan perawatan yang telaten dan semangat belajar yang tinggi antarwarga, kebun ini berhasil memberikan hasil yang memuaskan. Terong putih ini tidak hanya dijual di pasar lokal, tapi juga menjadi bahan masakan sehari-hari yang sehat dan lezat di meja makan keluarga kami. Semoga semangat bertani ini terus tumbuh di hati generasi muda dusun.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="kebun-mentimun-warga.jpeg" alt="Kebun Mentimun Warga Sepinggan Gelik">
+            <p><strong>🥒 Kebun Mentimun — Kesegaran yang Tumbuh di Ladang</strong><br>Mentimun adalah salah satu tanaman andalan warga di lahan-lahan ladang yang tersedia. Tanaman ini merambat rapi dan menghasilkan buah yang renyah serta segar. Banyak warga memilih menanam mentimun karena perawatannya yang tidak terlalu sulit dan bisa ditanam di sela-sela masa tanam padi. Hasil panennya dibawa ke pasar untuk dijual, menjadi pendapatan tambahan yang lumayan bagi keluarga. Di siang hari yang terik, buah mentimun segar ini sering menjadi teman setia yang menyegarkan dahaga para petani yang sedang bekerja di ladang.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="kebun-jagung-warga.jpeg" alt="Kebun Jagung Warga Sepinggan Gelik">
+            <p><strong>🌽 Kebun Jagung — Sumber Pangan & Rezeki yang Melimpah</strong><br>Barisan tanaman jagung yang tumbuh tegak dan rapi di ladang warga adalah pemandangan yang menyiratkan harapan. Jagung ditanam di lahan-lahan yang tidak dialiri air sawah, sehingga tanah tetap dimanfaatkan dengan optimal. Saat bulir jagung mulai menguning dan terisi penuh, wajah petani pun ikut berseri-seri menanti masa panen. Hasilnya bisa dijual ke pengepul, diolah menjadi makanan tradisional, maupun diberikan sebagai pakan ternak. Jagung mengajarkan kami bahwa setiap lahan, sekecil apa pun, pasti memiliki potensi jika dikelola dengan niat dan kerja keras yang tulus.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="kebun-kelapa-sawit-warga.jpeg" alt="Perkebunan Kelapa Sawit Warga Sepinggan Gelik">
+            <p><strong>🌴 Perkebunan Kelapa Sawit — Harapan Penghasilan Jangka Panjang</strong><br>Pohon-pohon sawit yang tumbuh rapi dan rimbun di ladang warga menjadi sumber harapan ekonomi yang stabil bagi banyak keluarga di Sepinggan Gelik. Perawatan yang dilakukan secara rutin dan bersama-sama membuat kebun sawit ini selalu terlihat rapi dan menghasilkan buah yang berkualitas. Pendapatan dari kebun sawit ini sering digunakan untuk biaya pendidikan anak, pembangunan rumah, serta tabungan masa depan keluarga. Warga juga selalu berupaya menjaga keseimbangan lingkungan di sekitar perkebunan, agar kemajuan ekonomi tidak merusak alam tempat kami tinggal dan mencari nafkah bersama.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="pos-satkamling-bersatu-desa-sepinggan.jpeg" alt="Pos Satkamling Bersatu Desa Sepinggan">
+            <p><strong>🛡️ Pos Satkamling Bersatu — Menjaga Keamanan Bersama</strong><br>Inilah pos tempat para warga secara bergilir berjaga menjaga keamanan lingkungan di wilayah Desa Sepinggan. Pos ini bukan sekadar bangunan kecil di pinggir jalan, melainkan simbol kebersamaan dan tanggung jawab warga terhadap keamanan bersama. Di sini bapak-bapak dan pemuda dusun duduk bersama, berkoordinasi, dan berpatroli agar suasana dusun tetap aman, damai, dan kondusif. Semangat saling menjaga inilah yang membuat warga merasa tenang tinggal di lingkungan ini — karena kami tahu, tetangga adalah saudara yang siap menjaga satu sama lain.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="jalan-dusun-sepinggan-gelik.jpeg" alt="Jalan Dusun Sepinggan Gelik">
+            <p><strong>🛣️ Jalan Dusun — Menghubungkan Rumah dan Harapan</strong><br>Jalan yang membelah wilayah dusun ini adalah urat nadi kehidupan sehari-hari warga. Di sepanjang jalan ini berdiri rumah-rumah warga yang tertata rapi, dikelilingi pepohonan hijau yang meneduhkan suasana. Jalan yang baik memudahkan anak-anak berangkat ke sekolah, memperlancar transportasi hasil panen ke pasar, dan memudahkan siapa pun yang ingin berkunjung ke dusun kami. Warga pun bergotong royong merawat dan membersihkan jalan ini secara berkala — karena kami sadar, jalan yang baik adalah pintu gerbang menuju kemajuan bersama.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="sd-negeri-7-sepinggan-gelik.jpeg" alt="SD Negeri 7 Sepinggan Gelik">
+            <p><strong>🏫 SD Negeri 7 Sepinggan Gelik — Jendela Dunia Anak Dusun</strong><br>Suasana sekolah tempat anak-anak dusun menuntut ilmu dan menggapai cita-cita. Gedung sekolah ini berdiri sebagai harapan dan masa depan bagi setiap anak yang tinggal di wilayah Sepinggan Gelik. Di sini mereka belajar membaca, menulis, berhitung, dan belajar menjadi anak yang sopan serta berbakti kepada orang tua. Semoga setiap anak yang melangkahkan kaki ke sekolah ini kelak tumbuh menjadi orang yang berguna bagi keluarga, dusun, bangsa, dan negara. Pendidikan adalah kunci yang akan membuka pintu-pintu peluang bagi masa depan mereka kelak.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="tk-satu-atap-sepinggan-gelik.jpeg" alt="TK Satu Atap Sepinggan Gelik">
+            <p><strong>🎒 TK Satu Atap — Langkah Pertama Menuju Masa Depan</strong><br>Inilah tempat anak-anak usia dini pertama kali belajar mengenal huruf, angka, warna, dan bermain bersama teman-teman sebayanya. Sekolah ini disebut "Satu Atap" karena letaknya berada dalam satu lingkungan bersama sekolah dasar negeri, sehingga memudahkan akses pendidikan bagi anak-anak dusun dari usia paling dini. Di sini mereka belajar berani tampil, berbagi, dan mandiri sebelum melanjutkan ke jenjang sekolah yang lebih tinggi. Senyum ceria anak-anak TK ini adalah semangat dan harapan terbesar bagi masa depan dusun kami.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="kebun-jeruk-warga.jpeg" alt="Kebun Jeruk Warga Sepinggan Gelik">
+            <p><strong>🍊 Kebun Jeruk — Buah Segar Penuh Vitamin & Rezeki</strong><br>Pohon-pohon jeruk yang tumbuh subur di kebun warga menjadi salah satu sumber penghasilan tambahan yang lumayan bagi keluarga. Saat musim panen tiba, buah-buah jeruk yang berwarna kuning keemasan terlihat cantik bergelantungan di dahan, memancarkan aroma segar yang menyapa siapa saja yang lewat. Buah ini tidak hanya dijual ke pasar untuk menambah pendapatan keluarga, tetapi juga dinikmati sendiri sebagai buah segar yang kaya vitamin. Kebun jeruk ini mengajarkan kami bahwa kesabaran merawat pohon akan berbuah manis pada waktunya — persis seperti hidup yang indah jika dijalani dengan ketekunan dan ketulusan hati.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="panen-semangka.jpeg" alt="Kebun Semangka Warga Sepinggan Gelik">
+            <p><strong>🍉 Kebun Semangka — Buah Segar Penuh Rezeki</strong><br>Semangka tumbuh subur merambat di ladang yang tanahnya berpasir dan terkena sinar matahari penuh. Warga merawatnya dengan sabar dari penyemaian hingga buah matang siap dipetik. Hasilnya dinikmati keluarga di rumah maupun dijual ke pasar, menjadi penghasilan tambahan yang lumayan bagi warga. Buah yang manis ini mengajarkan kami bahwa hasil yang baik selalu butuh kesabaran dan perawatan yang tulus.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="tanaman-padi-sawah.jpeg" alt="Tanaman Padi di Sawah Sepinggan Gelik">
+            <p><strong>🌾 Padi yang Menghijau — Harapan Para Petani</strong><br>Lihatlah hamparan padi yang masih muda dan hijau merata di sepanjang sawah — tanda bahwa kehidupan sedang tumbuh dengan baik di tanah kami. Air yang cukup dan tanah yang subur membuat batang padi tumbuh tegak dan kuat. Para petani merawatnya dengan penuh kesabaran, menunggu waktu yang tepat hingga bulir padi menguning dan siap dipanen. Setiap helai daun padi ini menyimpan cerita kerja keras, keringat, dan doa tulus dari pemiliknya. Semoga selalu ada kelimpahan rezeki bagi para petani — karena merekalah yang memberi makan kita semua setiap hari.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="hujan-dusun-sepinggan-gelik.jpeg" alt="Suasana Hujan di Dusun Sepinggan Gelik">
+            <p><strong>🌧️ Ketika Hujan Membasahi Tanah Kami — Anugerah yang Dinanti</strong><br>Bagi kami yang hidup dari bertani dan bercocok tanam, hujan bukan sekadar cuaca, melainkan anugerah yang dinanti-nantikan kedatangannya. Saat langit mulai mendung dan rintik air turun membasahi tanah yang kering, semua tanaman seakan ikut tersenyum dan menyambut berkah dari langit ini. Sungai dan saluran air pun kembali penuh mengalir membawa kehidupan ke ladang-ladang warga. Hujan mengingatkan kami untuk selalu bersyukur — karena air adalah sumber kehidupan yang jika dijaga dengan baik, akan memberi manfaat bagi banyak makhluk hidup di sekitarnya.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="sungai-anak-bermain.jpeg" alt="Anak-anak Bermain di Sungai Sepinggan Gelik">
+            <p><strong>🌊 Sungai & Tawa Anak-anak — Warisan Masa Kecil yang Sederhana</strong><br>Dulu hingga kini, sungai selalu menjadi bagian tak terpisahkan dari masa kecil anak-anak dusun. Bermain air, menangkap ikan kecil, dan mandi bersama di sungai yang jernih adalah kenangan indah yang dibawa hingga dewasa. Tawa riang anak-anak yang bermain di tepian sungai ini adalah pemandangan yang paling sederhana namun paling berharga bagi kami. Semoga sungai ini tetap jernih dan mengalir bersih, agar anak-anak di masa depan pun masih bisa menikmati keindahan alam yang sama seperti yang kami rasakan hingga saat ini — bebas bermain, sehat, dan bahagia di kampung halaman sendiri.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="lapangan-bola-pemuda-sepinggan-gelik.jpeg" alt="Lapangan Bola Pemuda Sepinggan Gelik">
+            <p><strong>⚽ Lapangan Bola — Tempat Pemuda Melatih Semangat & Kebersamaan</strong><br>Di tengah dusun terdapat lapangan yang menjadi tempat berkumpulnya para pemuda dusun sepulang sekolah maupun di hari libur. Di sini mereka bermain bola voli maupun sepak bola dengan penuh semangat dan sportivitas. Lapangan ini bukan sekadar tempat berolahraga, melainkan tempat persahabatan dijalin, bakat diasah, dan semangat kebersamaan dibangun di antara generasi muda. Harapannya, energi positif para pemuda ini tidak hanya habis di lapangan, tetapi juga dibawa ke dalam kehidupan nyata — menjadi pemuda yang cerdas, sehat, dan berguna bagi kemajuan dusun tercinta.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="senja-dusun-sepinggan-gelik.jpeg" alt="Pemandangan Senja di Dusun Sepinggan Gelik">
+            <p><strong>🌅 Senja di Dusun — Penutup Hari yang Penuh Syukur</strong><br>Saat matahari mulai terbenam di ufuk barat dan langit berubah warna menjadi jingga keunguan, pemandangan di dusun kami terlihat begitu tenang dan damai. Cahaya senja yang menyinari hamparan sawah dan pepohonan hijau menciptakan pemandangan yang menenangkan hati siapa pun yang melihatnya. Warga pulang dari ladang dengan wajah lelah namun hati yang puas, anak-anak dipanggil pulang ke rumah untuk beristirahat, dan lampu-lampu rumah mulai menyala satu per satu. Senja ini mengingatkan kami untuk berhenti sejenak, bersyukur atas hari yang telah berlalu, dan berdoa agar esok hari datang membawa kebaikan yang lebih indah lagi.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="balon-anak-lomba.jpeg" alt="Lomba Balon Anak-anak di Dusun Sepinggan Gelik">
+            <p><strong>🎈 Lomba Balon — Keceriaan Anak-anak di Hari Perayaan</strong><br>Setiap ada perayaan besar di dusun, anak-anak selalu menjadi bintang yang paling dinanti kehadirannya. Lomba balon ini adalah salah satu kegiatan sederhana yang selalu disambut dengan antusiasme luar biasa oleh anak-anak. Mereka berlari, tertawa, dan berusaha menyelesaikan perlombaan dengan sebaik-baiknya. Tidak semua menjadi juara satu, namun semua pulang dengan hati gembira dan kenangan indah. Di sinilah kami ingin anak-anak tumbuh — dalam suasana yang penuh tawa, kasih sayang, dan kebersamaan yang hangat dari lingkungan tempat mereka tinggal.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="kerupuk-lomba-ibu.jpeg" alt="Lomba Makan Kerupuk Ibu-ibu Sepinggan Gelik">
+            <p><strong>🍘 Lomba Makan Kerupuk — Tawa dan Kebersamaan Ibu-ibu Warga</strong><br>Perayaan hari besar di dusun kami tidak lengkap tanpa lomba makan kerupuk yang selalu menghadirkan tawa tak henti-henti. Ibu-ibu berbaris rapi, siap mengikuti lomba dengan penuh semangat dan kegembiraan. Tepuk tangan dan sorak-sorai penonton yang menyemangati peserta membuat suasana makin meriah dan hangat. Lomba sederhana ini mengajarkan kami bahwa kebahagiaan tidak selalu datang dari hal yang mewah — terkadang tawa bersama tetangga di bawah langit terbuka sudah cukup membuat hati merasa kaya dan penuh sukacita.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="padi-menguning-siap-panen.jpeg" alt="Padi Menguning Siap Panen Sepinggan Gelik">
+            <p><strong>🌾 Padi Menguning — Tanda Bahagia yang Dinanti</strong><br>Saat hamparan padi yang tadinya hijau berubah warna menjadi kuning keemasan dan batangnya mulai merunduk tertahan beratnya bulir padi yang penuh — itulah momen paling dinanti setiap petani. Wajah yang biasanya lelah bekerja di ladang kini berubah berseri penuh sukacita. Doa dan kerja keras selama berbulan-bulan akhirnya terbayar lunas dengan hasil yang melimpah. Padi yang menguning ini bukan sekadar tanaman siap panen, melainkan simbol rezeki yang diberkati — semoga setiap butirnya membawa berkah bagi meja makan setiap keluarga di dusun kami.</p>
+        </div>
+        <div class="galeri-card">
+            <img src="gotong-royong-jalan-sungai.jpeg" alt="Gotong Royong Bersih Jalan dan Sungai Sepinggan Gelik">
+            <p><strong>🤝 Gotong Royong — Jiwa Sepinggan Gelik yang Tak Pernah Pudar</strong><br>Inilah pemandangan yang paling membanggakan di dusun kami — pria, wanita, hingga pemuda berkumpul bersama membersihkan jalan dan tepian sungai tanpa diminta dan tanpa dibayar. Semangat gotong royong ini adalah warisan leluhur yang terus kami jaga dan tanamkan kepada setiap generasi. Ketika beban dibagi bersama, maka berat pun terasa ringan; ketika kebaikan dilakukan bersama, maka manfaatnya dirasakan oleh semua orang. Semoga semangat saling membantu ini terus hidup dan tumbuh di hati setiap warga, selamanya.</p>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:2.5rem; color:var(--biru-med); font-weight:500;">📸 Foto-foto ini adalah kisah kami — sederhana namun tulus, kecil namun bermakna, dan kami bangga membagikannya kepada Anda semua.</p>
+</section>
+
+<hr class="pemisah">
+
+<footer>
+    <p><strong>&copy; 2026 Dusun Sepinggan Gelik</strong></p>
+    <p>Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Kalimantan Barat — Kode Pos 79453</p>
+</footer>
+
+<script>
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>
