@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dusun Sepinggan Gelik — Potensi</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif; scroll-behavior:smooth;}
+        :root{
+            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
+            --biru-cerah:#69b1ff; --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+        }
+        body{background:var(--biru-muda); color:var(--teks); line-height:1.9;}
+        header{background:linear-gradient(135deg,var(--biru-tua),var(--biru-med)); color:var(--putih); padding:1rem 5%; position:sticky; top:0; z-index:999; box-shadow:0 2px 12px rgba(0,0,0,.15);}
+        .nav{max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; position:relative;}
+        .logo{font-size:1.3rem; font-weight:700;}
+        .menu-toggle{display:none; font-size:1.8rem; cursor:pointer; padding:.3rem .8rem; border-radius:6px; background:rgba(255,255,255,.15);}
+        nav ul{display:flex; list-style:none; gap:1.3rem; flex-wrap:wrap;}
+        nav a{color:var(--putih); text-decoration:none; font-weight:500; padding:.5rem 0; border-bottom:2px solid transparent; transition:.3s;}
+        nav a:hover, nav a.active{border-bottom:2px solid var(--putih);}
+        section{max-width:1200px; margin:0 auto; padding:3.5rem 5%;}
+        h2{text-align:center; color:var(--biru-tua); font-size:2rem; margin-bottom:2rem; padding-top:1rem;}
+        h2::after{content:''; display:block; width:90px; height:4px; background:var(--biru-med); margin:.6rem auto 0; border-radius:2px;}
+        .card{background:var(--putih); border-radius:14px; padding:2rem; box-shadow:0 5px 18px rgba(43,125,233,.13); margin-bottom:1.5rem;}
+        .card h3{color:var(--biru-tua); margin-bottom:1rem; font-size:1.35rem;}
+        .grid-2{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.6rem;}
+        .pemisah{height:3px; background:linear-gradient(to right,transparent,var(--biru-med),transparent); border:none; margin:2.5rem auto; max-width:650px;}
+        footer{background:var(--biru-tua); color:var(--putih); text-align:center; padding:2.2rem 5%; margin-top:2rem;}
+        
+        @media(max-width:768px){
+            .menu-toggle{display:block;}
+            nav ul{position:absolute; top:100%; left:0; right:0; flex-direction:column; background:var(--biru-tua); padding:1.2rem 1.5rem; gap:1rem; display:none; border-radius:0 0 14px 14px; box-shadow:0 8px 16px rgba(0,0,0,.15); z-index:998;}
+            nav ul.active{display:flex;}
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="logo">🏡 Sepinggan Gelik</div>
+        <nav>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+            <ul id="navMenu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="sejarah.html">Sejarah</a></li>
+                <li><a href="potensi.html" class="active">Potensi</a></li>
+                <li><a href="kegiatan.html">Kegiatan & Galeri</a></li>
+                <li><a href="kontak.html">Pesan & Kontak</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section>
+    <h2>🌾 Potensi & Kekayaan Alam Kami</h2>
+    <p style="text-align:center; max-width:700px; margin:0 auto 2rem;">Tanah kami kaya, air kami jernih, dan alam kami menyediakan segala yang dibutuhkan untuk hidup layak. Inilah kekayaan yang Tuhan titipkan kepada kami untuk dijaga dan dikelola dengan rasa syukur serta tanggung jawab.</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <h3>🌾 Pertanian — Tulang Punggung Kehidupan</h3>
+            <p>Sawah yang membentang luas di sekeliling dusun adalah sumber kehidupan utama masyarakat kami. Setiap musim tanam menjadi momen kebersamaan petani dalam mengolah tanah, menanam padi, hingga memanen hasil jerih payah mereka. Air yang cukup dan tanah yang subur membuat padi tumbuh dengan baik setiap tahunnya.</p>
+            <p>Hasil panen tidak hanya mencukupi kebutuhan makan keluarga, tetapi juga dijual ke pasar untuk memenuhi kebutuhan lain. Setiap butir beras yang kita makan adalah hasil kerja keras, kesabaran, dan doa para petani — pantaslah kita menghormati dan menghargainya.</p>
+        </div>
+        <div class="card">
+            <h3>🍊🍉 Perkebunan — Sumber Harapan Tambahan</h3>
+            <p>Selain padi, warga juga banyak mengembangkan kebun jeruk, semangka, kelapa, dan tanaman buah lainnya di lahan pekarangan maupun ladang yang agak jauh dari pemukiman. Buah-buahan ini tidak hanya menyegarkan keluarga di rumah, tetapi juga menjadi sumber penghasilan tambahan yang lumayan saat musim panen tiba.</p>
+            <p>Anak-anak kecil pun belajar mengenal alam dari kebun-kebun ini — mereka tahu dari mana buah itu berasal, bagaimana cara merawatnya hingga tumbuh berbuah lebat. Semoga rasa cinta terhadap alam dan kerja keras ini terus diwariskan kepada generasi berikutnya.</p>
+        </div>
+        <div class="card">
+            <h3>🥬 Sayuran & Tanaman Palawija — Potensi Baru yang Berkembang</h3>
+            <p>Belakangan ini warga juga semakin giat mengembangkan budidaya sayuran seperti terong putih, mentimun, serta tanaman jagung di lahan-lahan ladang yang tersedia. Komoditas ini menjadi pilihan yang tepat karena masa tanamnya relatif singkat dan permintaan pasar yang terus meningkat.</p>
+            <p>Dengan semangat belajar dan saling berbagi pengalaman antarwarga, kebun-kebun sayur ini mulai tumbuh subur dan memberikan hasil yang memuaskan. Hal ini membuktikan bahwa tanah kami sangat subur dan berpotensi dikembangkan dengan berbagai jenis tanaman, tidak hanya satu jenis saja.</p>
+        </div>
+        <div class="card">
+            <h3>🌴 Perkebunan Kelapa Sawit — Penghasilan Jangka Panjang</h3>
+            <p>Perkebunan kelapa sawit juga menjadi salah satu penopang ekonomi keluarga di Sepinggan Gelik. Pohon-pohon sawit yang tumbuh rapi dan rimbun memberikan harapan penghasilan yang stabil dalam jangka waktu yang panjang bagi banyak keluarga warga.</p>
+            <p>Kami juga selalu berupaya menjaga keseimbangan lingkungan di sekitar perkebunan, agar kemajuan ekonomi tidak merusak alam tempat kami tinggal dan mencari nafkah bersama. Hasil yang baik seharusnya selalu didapat dengan cara yang tulus dan bertanggung jawab terhadap alam.</p>
+        </div>
+        <div class="card">
+            <h3>💧 Sungai & Saluran Air — Urat Nadi Kehidupan</h3>
+            <p>Aliran sungai dan saluran air yang membelah wilayah dusun kami bukan sekadar air yang mengalir, melainkan sumber kehidupan yang tak ternilai harganya. Air ini digunakan untuk mengairi sawah, keperluan rumah tangga, hingga tempat bermain anak-anak dan mandi bersama warga.</p>
+            <p>Karena itulah menjaga kebersihan air dan lingkungan di sekitarnya menjadi kesepakatan bersama yang selalu ditegaskan kepada setiap warga. Mari kita jaga agar air tetap jernih mengalir, dan manfaatnya tetap bisa dinikmati anak cucu kelak.</p>
+        </div>
+        <div class="card">
+            <h3>🏫 Sarana & Prasarana — Melangkah Menuju Kemajuan</h3>
+            <p>Di Sepinggan Gelik, pendidikan menjadi jendela masa depan bagi setiap anak dusun. Keberadaan sekolah dan posyandu menjadi bukti bahwa warga dusun juga peduli terhadap pendidikan dan kesehatan. Jalan yang terus diperbaiki dan diperlebar memudahkan mobilitas warga untuk berdagang, bersekolah, maupun beraktivitas sehari-hari.</p>
+            <p>Semoga ke depannya fasilitas semakin lengkap dan memadai, agar setiap anak dusun memiliki kesempatan yang sama untuk maju dan meraih cita-cita, tanpa harus meninggalkan kampung halaman tercinta ini.</p>
+        </div>
+    </div>
+</section>
+
+<hr class="pemisah">
+
+<footer>
+    <p><strong>&copy; 2026 Dusun Sepinggan Gelik</strong></p>
+    <p>Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Kalimantan Barat — Kode Pos 79453</p>
+</footer>
+
+<script>
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>
