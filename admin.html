@@ -1,7 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin — Dusun Sepinggan Gelik</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+        :root{
+            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
+            --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+            --merah-err:#c0392b; --hijau:#27ae60;
+        }
+        body{background:var(--biru-muda); color:var(--teks); padding:2rem 1rem;}
+        .container{max-width:900px; margin:0 auto;}
+        .header-panel{background:var(--putih); padding:1.5rem 2rem; border-radius:12px; box-shadow:0 4px 15px rgba(43,125,233,.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;}
+        .header-panel h2{color:var(--biru-tua); font-size:1.4rem;}
+        .btn-keluar{background:var(--merah-err); color:var(--putih); border:none; padding:.6rem 1.2rem; border-radius:6px; cursor:pointer; font-weight:600; transition:.2s;}
+        .btn-keluar:hover{opacity:.85;}
+        
+        .card{background:var(--putih); border-radius:12px; padding:2rem; box-shadow:0 4px 15px rgba(43,125,233,.1);}
+        .card h3{color:var(--biru-tua); margin-bottom:1rem; font-size:1.2rem;}
+        
+        table{width:100%; border-collapse:collapse; margin-top:1rem;}
+        th, td{padding:.9rem; text-align:left; border-bottom:1px solid #e1eafc; font-size:.95rem;}
+        th{background:var(--abu-lembut); color:var(--biru-tua); font-weight:600;}
+        tr:hover{background:#f8fbff;}
+        .kosong{text-align:center; color:#7a8aa8; padding:2rem; font-style:italic;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-panel">
+        <h2>🛠️ Panel Pengurus Dusun Sepinggan Gelik</h2>
+        <button class="btn-keluar" id="btnKeluar">Keluar (Logout)</button>
+    </div>
+
+    <div class="card">
+        <h3>📩 Daftar Pesan & Pengaduan Masuk</h3>
+        <p style="color:#627494; font-size:.9rem;">Berikut adalah data pesan atau aspirasi yang dikirimkan warga melalui halaman kontak.</p>
+        
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pengirim</th>
+                        <th>Nomor WhatsApp</th>
+                        <th>Isi Pesan</th>
+                        <th>Waktu</th>
+                    </tr>
+                </thead>
+                <tbody id="tabel-pesan">
+                    <!-- Data pesan akan muncul di sini secara otomatis -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <script>
-    // Cek apakah admin sudah login lewat halaman login.html
-    if (sessionStorage.getItem("statusLoginAdmin") !== "sudah_login") {
-        alert("Anda belum login! Silakan login terlebih dahulu.");
-        window.location.href = "login.html"; // Lempar balik ke halaman login jika belum masuk
-    }
+// 1. Cek apakah admin sudah login atau belum
+if (sessionStorage.getItem("statusLoginAdmin") !== "sudah_login") {
+    alert("Anda belum login! Silakan login terlebih dahulu.");
+    window.location.href = "login.html";
+}
+
+// 2. Tombol Keluar (Logout)
+document.getElementById('btnKeluar').addEventListener('click', function() {
+    sessionStorage.removeItem("statusLoginAdmin");
+    window.location.href = "login.html";
+});
+
+// 3. Muat Data Pesan dari LocalStorage (jika terhubung dengan halaman kontak)
+const daftarPesan = JSON.parse(localStorage.getItem("dataPesanWarga")) || [];
+const tbody = document.getElementById('tabel-pesan');
+
+if (daftarPesan.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="kosong">Belum ada pesan atau pengaduan yang masuk.</td></tr>`;
+} else {
+    tbody.innerHTML = "";
+    daftarPesan.forEach((pesan, index) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${index + 1}</td>
+                <td><strong>${pesan.nama}</strong></td>
+                <td>${pesan.wa}</td>
+                <td>${pesan.isi}</td>
+                <td>${pesan.waktu || '-'}</td>
+            </tr>
+        `;
+    });
+}
 </script>
+
+</body>
+</html>
