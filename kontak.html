@@ -9,6 +9,7 @@
         :root{
             --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
             --biru-cerah:#69b1ff; --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+            --hijau-sukses:#27ae60; --kuning-pending:#d35400;
         }
         body{background:var(--biru-muda); color:var(--teks); line-height:1.9;}
         header{background:linear-gradient(135deg,var(--biru-tua),var(--biru-med)); color:var(--putih); padding:1rem 5%; position:sticky; top:0; z-index:999; box-shadow:0 2px 12px rgba(0,0,0,.15);}
@@ -32,27 +33,33 @@
         .pemisah{height:3px; background:linear-gradient(to right,transparent,var(--biru-med),transparent); border:none; margin:2.5rem auto; max-width:650px;}
         footer{background:var(--biru-tua); color:var(--putih); text-align:center; padding:2.2rem 5%; margin-top:2rem;}
 
-        /* ==== Buku Tamu ==== */
-        #form-buku-tamu{display:flex; flex-direction:column; gap:.9rem; margin-bottom:1.8rem;}
-        #form-buku-tamu input, #form-buku-tamu textarea{
+        /* ==== Pengaduan Warga ==== */
+        #form-pengaduan{display:flex; flex-direction:column; gap:.9rem; margin-bottom:1.8rem;}
+        #form-pengaduan input, #form-pengaduan textarea{
             padding:.8rem 1rem; border:1px solid #c7d7f5; border-radius:10px;
             font-family:inherit; font-size:1rem; background:var(--abu-lembut); color:var(--teks);
         }
-        #form-buku-tamu input:focus, #form-buku-tamu textarea:focus{
+        #form-pengaduan input:focus, #form-pengaduan textarea:focus{
             outline:none; border-color:var(--biru-med); background:var(--putih);
         }
-        #form-buku-tamu button{
+        #form-pengaduan button{
             padding:.9rem; background:var(--biru-med); color:var(--putih); border:none;
             border-radius:10px; font-weight:600; font-size:1rem; cursor:pointer; transition:.3s;
         }
-        #form-buku-tamu button:hover{background:var(--biru-tua);}
-        #form-buku-tamu button:disabled{opacity:.6; cursor:not-allowed;}
+        #form-pengaduan button:hover{background:var(--biru-tua);}
+        #form-pengaduan button:disabled{opacity:.6; cursor:not-allowed;}
         #status-kirim{text-align:center; min-height:1.4em; margin-bottom:1rem; color:var(--biru-tua); font-weight:500;}
-        .pesan-item{border-bottom:1px solid var(--biru-muda); padding:1rem 0;}
-        .pesan-item:last-child{border-bottom:none;}
-        .pesan-item .nama-tamu{font-weight:700; color:var(--biru-tua);}
-        .pesan-item .isi-pesan{margin:.3rem 0; color:var(--teks);}
-        .pesan-item .waktu-tamu{font-size:.82rem; color:#7a8aa8;}
+        
+        .pengaduan-item{border-bottom:1px solid var(--biru-muda); padding:1.2rem 0;}
+        .pengaduan-item:last-child{border-bottom:none;}
+        .pengaduan-header{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; margin-bottom:.4rem;}
+        .nama-pengadu{font-weight:700; color:var(--biru-tua);}
+        .lokasi-pengadu{font-size:.85rem; background:var(--biru-muda); color:var(--biru-med); padding:.2rem .6rem; border-radius:6px; font-weight:600;}
+        .badge{font-size:.78rem; padding:.2rem .6rem; border-radius:20px; font-weight:600; display:inline-block;}
+        .badge.belum{background:#fdebd0; color:var(--kuning-pending);}
+        .badge.sudah{background:#d4efdf; color:var(--hijau-sukses);}
+        .tanggapan-box{background:var(--abu-lembut); border-left:3px solid var(--biru-med); padding:.8rem 1rem; margin-top:.8rem; border-radius:0 8px 8px 0; font-size:.95rem;}
+        .waktu-pengaduan{font-size:.82rem; color:#7a8aa8; margin-top:.5rem;}
 
         @media(max-width:768px){
             .menu-toggle{display:block;}
@@ -119,21 +126,23 @@
 
 <hr class="pemisah">
 
-<section id="buku-tamu">
-    <h2>📝 Buku Tamu</h2>
+<section id="pengaduan">
+    <h2>📢 Layanan Pengaduan Warga</h2>
     <div class="card">
-        <p style="text-align:center; margin-bottom:1.5rem;">Sudah mampir ke halaman kami? Tinggalkan pesan atau kesan Anda di sini.</p>
+        <p style="text-align:center; margin-bottom:1.5rem;">Sampaikan aspirasi, laporan, atau pengaduan Anda terkait fasilitas maupun lingkungan Dusun Sepinggan Gelik.</p>
 
-        <form id="form-buku-tamu">
-            <input type="text" id="nama" placeholder="Nama Anda" required>
-            <textarea id="pesan" placeholder="Tulis pesan atau kesan Anda..." rows="3" required></textarea>
-            <button type="submit">Kirim Pesan</button>
+        <form id="form-pengaduan">
+            <input type="text" id="nama" placeholder="Nama Lengkap Warga" required>
+            <input type="text" id="lokasi" placeholder="Lokasi / RT (Contoh: RT 02)" required>
+            <textarea id="pesan" placeholder="Tuliskan pengaduan atau aspirasi Anda..." rows="4" required></textarea>
+            <button type="submit">Kirim Pengaduan</button>
         </form>
 
         <p id="status-kirim"></p>
 
-        <div id="daftar-buku-tamu">
-            <p style="text-align:center; color:#7a8aa8;">Memuat pesan...</p>
+        <h3 style="margin: 2rem 0 1rem; color: var(--biru-tua); font-size: 1.2rem;">📋 Daftar Pengaduan Masuk</h3>
+        <div id="daftar-pengaduan">
+            <p style="text-align:center; color:#7a8aa8;">Memuat data pengaduan...</p>
         </div>
     </div>
 </section>
@@ -159,12 +168,12 @@ document.addEventListener('click', (e) => {
 </script>
 
 <script>
-// ==== Buku Tamu (Google Apps Script + Google Sheets) ====
+// ==== Pengaduan Warga (Google Apps Script + Google Sheets) ====
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLT_-Zn0wfkyFY4uTVTRfngiAr4KXFmeWsSAo-yitplaYX9qoIz-z_CZU_SBRwEpRx/exec";
 
-const formTamu = document.getElementById('form-buku-tamu');
-const statusTamu = document.getElementById('status-kirim');
-const daftarTamu = document.getElementById('daftar-buku-tamu');
+const formPengaduan = document.getElementById('form-pengaduan');
+const statusKirim = document.getElementById('status-kirim');
+const daftarPengaduan = document.getElementById('daftar-pengaduan');
 
 function escapeHtml(str) {
     if (!str) return '';
@@ -173,39 +182,61 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
-function muatBukuTamu() {
+function muatPengaduan() {
     fetch(SCRIPT_URL)
         .then(res => res.json())
         .then(data => {
             if (!data || data.length === 0) {
-                daftarTamu.innerHTML = '<p style="text-align:center; color:#7a8aa8;">Belum ada pesan. Jadilah yang pertama menulis kesan!</p>';
+                daftarPengaduan.innerHTML = '<p style="text-align:center; color:#7a8aa8;">Belum ada pengaduan.</p>';
                 return;
             }
-            daftarTamu.innerHTML = data.map(item => `
-                <div class="pesan-item">
-                    <div class="nama-tamu">${escapeHtml(item.nama)}</div>
-                    <div class="isi-pesan">${escapeHtml(item.pesan)}</div>
-                    <div class="waktu-tamu">${escapeHtml(item.waktu)}</div>
-                </div>
-            `).join('');
+            daftarPengaduan.innerHTML = data.map(item => {
+                const statusSudah = item.status === "Sudah Ditanggapi";
+                const badgeClass = statusSudah ? "sudah" : "belum";
+                
+                let tanggapanHTML = "";
+                if (statusSudah && item.tanggapan) {
+                    tanggapanHTML = `
+                        <div class="tanggapan-box">
+                            <strong>💬 Tanggapan Petugas:</strong>
+                            <p>${escapeHtml(item.tanggapan)}</p>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="pengaduan-item">
+                        <div class="pengaduan-header">
+                            <span class="nama-pengadu">${escapeHtml(item.nama)}</span>
+                            <span class="lokasi-pengadu">📍 ${escapeHtml(item.lokasi)}</span>
+                        </div>
+                        <div style="margin:.4rem 0;"><strong>Pengaduan:</strong> ${escapeHtml(item.pesan)}</div>
+                        <div><span class="badge ${badgeClass}">${escapeHtml(item.status)}</span></div>
+                        ${tanggapanHTML}
+                        <div class="waktu-pengaduan">📅 ${escapeHtml(item.waktu)}</div>
+                    </div>
+                `;
+            }).join('');
         })
         .catch(() => {
-            daftarTamu.innerHTML = '<p style="text-align:center; color:#c0392b;">Gagal memuat pesan. Coba muat ulang halaman.</p>';
+            daftarPengaduan.innerHTML = '<p style="text-align:center; color:#c0392b;">Gagal memuat data pengaduan.</p>';
         });
 }
 
-formTamu.addEventListener('submit', function (e) {
+formPengaduan.addEventListener('submit', function (e) {
     e.preventDefault();
     const nama = document.getElementById('nama').value.trim();
+    const lokasi = document.getElementById('lokasi').value.trim();
     const pesan = document.getElementById('pesan').value.trim();
-    if (!nama || !pesan) return;
+    if (!nama || !lokasi || !pesan) return;
 
-    const tombolKirim = formTamu.querySelector('button');
+    const tombolKirim = formPengaduan.querySelector('button');
     tombolKirim.disabled = true;
-    statusTamu.textContent = "Mengirim pesan...";
+    statusKirim.textContent = "Mengirim pengaduan...";
 
     const formData = new FormData();
     formData.append('nama', nama);
+    formData.append('lokasi', lokasi);
     formData.append('pesan', pesan);
 
     fetch(SCRIPT_URL, {
@@ -213,19 +244,19 @@ formTamu.addEventListener('submit', function (e) {
         body: formData
     })
         .then(() => {
-            statusTamu.textContent = "Pesan terkirim, terima kasih! 🙏";
-            formTamu.reset();
-            setTimeout(muatBukuTamu, 1500);
+            statusKirim.textContent = "Pengaduan berhasil dikirim! 🙏";
+            formPengaduan.reset();
+            setTimeout(muatPengaduan, 1500);
         })
         .catch(() => {
-            statusTamu.textContent = "Gagal mengirim pesan. Coba lagi.";
+            statusKirim.textContent = "Gagal mengirim pengaduan. Coba lagi.";
         })
         .finally(() => {
             tombolKirim.disabled = false;
         });
 });
 
-muatBukuTamu();
+muatPengaduan();
 </script>
 </body>
 </html>
