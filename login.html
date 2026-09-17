@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin — Dusun Sepinggan Gelik</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+        :root{
+            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
+            --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+            --merah-err:#c0392b;
+        }
+        body{background:var(--biru-muda); color:var(--teks); display:flex; justify-content:center; align-items:center; min-height:100vh; padding:1rem;}
+        .login-card{background:var(--putih); border-radius:14px; padding:2.5rem 2rem; width:100%; max-width:400px; box-shadow:0 5px 18px rgba(43,125,233,.15);}
+        h2{color:var(--biru-tua); text-align:center; margin-bottom:.5rem; font-size:1.6rem;}
+        p{text-align:center; color:#7a8aa8; font-size:.9rem; margin-bottom:1.8rem;}
+        .form-group{display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.2rem;}
+        label{font-weight:600; font-size:.9rem; color:var(--biru-tua);}
+        input{padding:.8rem 1rem; border:1px solid #c7d7f5; border-radius:8px; font-size:1rem; background:var(--abu-lembut); color:var(--teks);}
+        input:focus{outline:none; border-color:var(--biru-med); background:var(--putih);}
+        button{width:100%; padding:.9rem; background:var(--biru-med); color:var(--putih); border:none; border-radius:8px; font-weight:600; font-size:1rem; cursor:pointer; transition:.3s; margin-top:.5rem;}
+        button:hover{background:var(--biru-tua);}
+        #pesan-error{color:var(--merah-err); text-align:center; font-size:.85rem; margin-top:1rem; min-height:1.2em;}
+        .back-link{display:block; text-align:center; margin-top:1.5rem; color:var(--biru-med); text-decoration:none; font-size:.9rem;}
+        .back-link:hover{text-decoration:underline;}
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>🔐 Login Pengurus</h2>
+    <p>Masukkan sandi admin untuk mengelola pengaduan</p>
+    
+    <form id="form-login">
+        <div class="form-group">
+            <label>Kata Sandi Admin</label>
+            <input type="password" id="sandi" placeholder="Masukkan sandi..." required>
+        </div>
+        <button type="submit">Masuk Panel</button>
+    </form>
+
+    <div id="pesan-error"></div>
+    <a href="kontak.html" class="back-link">&larr; Kembali ke Beranda Utama</a>
+</div>
+
+<script>
+const formLogin = document.getElementById('form-login');
+const pesanError = document.getElementById('pesan-error');
+
+formLogin.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const inputSandi = document.getElementById('sandi').value.trim();
+    
+    // GANTI KATA SANDI DI BAWAH INI SESUAI KEINGINAN ANDA
+    const SANDI_RAHASIA = "adminsepinggan123"; 
+
+    if (inputSandi === SANDI_RAHASIA) {
+        // Simpan izin masuk ke memori browser sementara
+        sessionStorage.setItem("statusLoginAdmin", "sudah_login");
+        // Alihkan langsung ke halaman admin
+        window.location.href = "admin.html";
+    } else {
+        pesanError.textContent = "Kata sandi salah! Silakan coba lagi.";
+        document.getElementById('sandi').value = "";
+    }
+});
+</script>
+
+</body>
+</html>
