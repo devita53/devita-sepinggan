@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin — Pengaduan Warga Sepinggan Gelik</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+        :root{
+            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
+            --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+            --hijau-sukses:#27ae60; --kuning-pending:#d35400;
+        }
+        body{background:var(--biru-muda); color:var(--teks); line-height:1.6; padding:2rem 1rem;}
+        .container{max-width:900px; margin:0 auto;}
+        .card{background:var(--putih); border-radius:14px; padding:2rem; box-shadow:0 5px 18px rgba(43,125,233,.13); margin-bottom:1.5rem;}
+        h2{color:var(--biru-tua); text-align:center; margin-bottom:1.5rem;}
+        
+        .pengaduan-item{border-bottom:1px solid #c7d7f5; padding:1.5rem 0;}
+        .pengaduan-item:last-child{border-bottom:none;}
+        .pengaduan-header{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; margin-bottom:.5rem;}
+        .nama-pengadu{font-weight:700; color:var(--biru-tua); font-size:1.1rem;}
+        .lokasi-pengadu{font-size:.85rem; background:var(--biru-muda); color:var(--biru-med); padding:.2rem .6rem; border-radius:6px; font-weight:600;}
+        
+        .badge{font-size:.78rem; padding:.2rem .6rem; border-radius:20px; font-weight:600; display:inline-block;}
+        .badge.belum{background:#fdebd0; color:var(--kuning-pending);}
+        .badge.sudah{background:#d4efdf; color:var(--hijau-sukses);}
+        
+        .form-tanggapan{margin-top:1rem; display:flex; flex-direction:column; gap:.8rem; background:var(--abu-lembut); padding:1rem; border-radius:10px;}
+        .form-tanggapan textarea{
+            padding:.8rem; border:1px solid #c7d7f5; border-radius:8px; font-family:inherit; font-size:.95rem; background:var(--putih);
+        }
+        .form-tanggapan button{
+            padding:.7rem 1.2rem; background:var(--hijau-sukses); color:var(--putih); border:none; border-radius:8px; font-weight:600; cursor:pointer; align-self:flex-start; transition:.3s;
+        }
+        .form-tanggapan button:hover{background:#219653;}
+        .waktu-pengaduan{font-size:.82rem; color:#7a8aa8; margin-top:.5rem;}
+        .status-info{font-weight:600; font-size:0.9rem; margin-top:.5rem; text-align:right;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h2>🛠️ Panel Admin: Kelola Pengaduan Warga</h2>
+        <p style="text-align:center; color:#7a8aa8; margin-bottom:1.5rem;">Halaman khusus pengurus untuk menanggapi pengaduan yang masuk dari warga.</p>
+        
+        <div id="daftar-admin">
+            <p style="text-align:center; color:#7a8aa8;">Memuat data pengaduan...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Menggunakan SCRIPT_URL yang sama persis dengan halaman utama
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLT_-Zn0wfkyFY4uTVTRfngiAr4KXFmeWsSAo-yitplaYX9qoIz-z_CZU_SBRwEpRx/exec";
+
+const daftarAdmin = document.getElementById('daftar-admin');
+
+function escapeHtml(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+function muatDataAdmin() {
+    fetch(SCRIPT_URL)
+        .then(res => res.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                daftarAdmin.innerHTML = '<p style="text-align:center; color:#7a8aa8;">Belum ada pengaduan masuk.</p>';
+                return;
+            }
+            
+            // Membalik urutan agar pengaduan terbaru muncul di paling atas
+            const dataTerbalik = [...data].reverse();
+
+            daftarAdmin.innerHTML = dataTerbalik.map((item, index) => {
+                const indeksAsli = data.length - 1 - index;
+                const statusSudah = item.status === "Sudah Ditanggapi";
+                const badgeClass = statusSudah ? "sudah" : "belum";
+
+                return `
+                    <div class="pengaduan-item">
+                        <div class="pengaduan-header">
+                            <span class="nama-pengadu">${escapeHtml(item.nama)}</span>
+                            <span class="lokasi-pengadu">📍 ${escapeHtml(item.lokasi)}</span>
+                        </div>
+                        <div style="margin:.4rem 0;"><strong>Pengaduan:</strong> ${escapeHtml(item.pesan)}</div>
+                        <div style="margin-bottom:.5rem;"><span class="badge ${badgeClass}">${escapeHtml(item.status)}</span></div>
+                        <div class="waktu-pengaduan">📅 Waktu Kirim: ${escapeHtml(item.waktu)}</div>
+
+                        <div class="form-tanggapan">
+                            <label style="font-size:0.9rem; font-weight:600; color:var(--biru-tua);">Tanggapan Petugas / Admin:</label>
+                            <textarea id="tanggapan-${indeksAsli}" rows="2" placeholder="Tulis tanggapan atau solusi untuk warga...">${escapeHtml(item.tanggapan || '')}</textarea>
+                            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                                <button onclick="kirimTanggapan(${indeksAsli})">Kirim Tanggapan</button>
+                                <span id="notif-${indeksAsli}" class="status-info" style="color:var(--biru-tua);"></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        })
+        .catch(() => {
+            daftarAdmin.innerHTML = '<p style="text-align:center; color:#c0392b;">Gagal memuat data pengaduan.</p>';
+        });
+}
+
+function kirimTanggapan(indexBaris) {
+    const isiTanggapan = document.getElementById(`tanggapan-${indexBaris}`).value.trim();
+    const notifSpan = document.getElementById(`notif-${indexBaris}`);
+    
+    if (!isiTanggapan) {
+        alert("Tanggapan tidak boleh kosong!");
+        return;
+    }
+
+    notifSpan.textContent = "Mengirim...";
+
+    const formData = new FormData();
+    formData.append('action', 'tanggapi');
+    formData.append('row', indexBaris + 2); // Baris di Google Sheets (index 0 + header row 1)
+    formData.append('tanggapan', isiTanggapan);
+
+    fetch(SCRIPT_URL, { method: 'POST', body: formData })
+        .then(() => {
+            notifSpan.textContent = "Berhasil dikirim! ✅";
+            setTimeout(() => {
+                muatDataAdmin();
+            }, 1000);
+        })
+        .catch(() => {
+            notifSpan.textContent = "Gagal mengirim ❌";
+        });
+}
+
+muatDataAdmin();
+</script>
+</body>
+</html>
