@@ -9,10 +9,10 @@
         :root{
             --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
             --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
-            --merah-err:#c0392b; --hijau:#27ae60;
+            --merah-err:#c0392b; --hijau:#27ae60; --kuning-pending:#d35400;
         }
         body{background:var(--biru-muda); color:var(--teks); padding:2rem 1rem;}
-        .container{max-width:900px; margin:0 auto;}
+        .container{max-width:1000px; margin:0 auto;}
         .header-panel{background:var(--putih); padding:1.5rem 2rem; border-radius:12px; box-shadow:0 4px 15px rgba(43,125,233,.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;}
         .header-panel h2{color:var(--biru-tua); font-size:1.4rem;}
         .btn-keluar{background:var(--merah-err); color:var(--putih); border:none; padding:.6rem 1.2rem; border-radius:6px; cursor:pointer; font-weight:600; transition:.2s;}
@@ -22,10 +22,17 @@
         .card h3{color:var(--biru-tua); margin-bottom:1rem; font-size:1.2rem;}
         
         table{width:100%; border-collapse:collapse; margin-top:1rem;}
-        th, td{padding:.9rem; text-align:left; border-bottom:1px solid #e1eafc; font-size:.95rem;}
+        th, td{padding:.9rem; text-align:left; border-bottom:1px solid #e1eafc; font-size:.95rem; vertical-align:middle;}
         th{background:var(--abu-lembut); color:var(--biru-tua); font-weight:600;}
         tr:hover{background:#f8fbff;}
         .kosong{text-align:center; color:#7a8aa8; padding:2rem; font-style:italic;}
+        
+        .badge{font-size:.78rem; padding:.25rem .7rem; border-radius:20px; font-weight:600; display:inline-block;}
+        .badge.belum{background:#fdebd0; color:var(--kuning-pending);}
+        .badge.sudah{background:#d4efdf; color:var(--hijau);}
+        
+        .btn-tanggapi{background:var(--biru-med); color:var(--putih); border:none; padding:.4rem .8rem; border-radius:6px; cursor:pointer; font-size:.85rem; font-weight:600; transition:.2s;}
+        .btn-tanggapi:hover{background:var(--biru-tua);}
     </style>
 </head>
 <body>
@@ -37,22 +44,23 @@
     </div>
 
     <div class="card">
-        <h3>📩 Daftar Pesan & Pengaduan Masuk</h3>
-        <p style="color:#627494; font-size:.9rem;">Berikut adalah data pesan atau aspirasi yang dikirimkan warga melalui halaman kontak.</p>
+        <h3>📩 Daftar Pengaduan & Aspirasi Warga</h3>
+        <p style="color:#627494; font-size:.9rem;">Kelola dan berikan tanggapan untuk setiap laporan yang dikirimkan warga melalui website.</p>
         
         <div style="overflow-x:auto;">
             <table>
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Pengirim</th>
-                        <th>Nomor WhatsApp</th>
-                        <th>Isi Pesan</th>
-                        <th>Waktu</th>
+                        <th>Nama & Lokasi</th>
+                        <th>Isi Pengaduan</th>
+                        <th>Status</th>
+                        <th>Tanggapan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="tabel-pesan">
-                    <!-- Data pesan akan muncul di sini secara otomatis -->
+                <tbody id="tabel-pengaduan">
+                    <tr><td colspan="6" class="kosong">Memuat data pengaduan dari server...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -60,7 +68,7 @@
 </div>
 
 <script>
-// 1. Cek apakah admin sudah login atau belum
+// 1. Cek apakah admin sudah login
 if (sessionStorage.getItem("statusLoginAdmin") !== "sudah_login") {
     alert("Anda belum login! Silakan login terlebih dahulu.");
     window.location.href = "login.html";
@@ -72,26 +80,68 @@ document.getElementById('btnKeluar').addEventListener('click', function() {
     window.location.href = "login.html";
 });
 
-// 3. Muat Data Pesan dari LocalStorage (jika terhubung dengan halaman kontak)
-const daftarPesan = JSON.parse(localStorage.getItem("dataPesanWarga")) || [];
-const tbody = document.getElementById('tabel-pesan');
+// 3. Konfigurasi URL Google Apps Script yang sama
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLT_-Zn0wfkyFY4uTVTRfngiAr4KXFmeWsSAo-yitplaYX9qoIz-z_CZU_SBRwEpRx/exec";
+const tbody = document.getElementById('tabel-pengaduan');
 
-if (daftarPesan.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" class="kosong">Belum ada pesan atau pengaduan yang masuk.</td></tr>`;
-} else {
-    tbody.innerHTML = "";
-    daftarPesan.forEach((pesan, index) => {
-        tbody.innerHTML += `
-            <tr>
-                <td>${index + 1}</td>
-                <td><strong>${pesan.nama}</strong></td>
-                <td>${pesan.wa}</td>
-                <td>${pesan.isi}</td>
-                <td>${pesan.waktu || '-'}</td>
-            </tr>
-        `;
-    });
+function escapeHtml(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
+
+// 4. Ambil dan tampilkan data dari Google Sheets
+function muatDataAdmin() {
+    fetch(SCRIPT_URL)
+        .then(res => res.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="kosong">Belum ada pengaduan atau aspirasi masuk.</td></tr>`;
+                return;
+            }
+            
+            tbody.innerHTML = "";
+            data.forEach((item, index) => {
+                const statusSudah = item.status === "Sudah Ditanggapi";
+                const badgeClass = statusSudah ? "sudah" : "belum";
+                const statusTeks = item.status || "Belum Ditanggapi";
+                const tanggapanTeks = item.tanggapan ? escapeHtml(item.tanggapan) : '<span style="color:#999; font-style:italic;">Belum ada tanggapan</span>';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>
+                            <strong>${escapeHtml(item.nama)}</strong><br>
+                            <span style="font-size:0.85rem; color:#627494;">📍 ${escapeHtml(item.lokasi)}</span><br>
+                            <span style="font-size:0.75rem; color:#9a8aa8;">📅 ${escapeHtml(item.waktu)}</span>
+                        </td>
+                        <td>${escapeHtml(item.pesan)}</td>
+                        <td><span class="badge ${badgeClass}">${statusTeks}</span></td>
+                        <td>${tanggapanTeks}</td>
+                        <td>
+                            <button class="btn-tanggapi" onclick="tanggapiPengaduan(${index}, '${escapeHtml(item.tanggapan || '')}')">Tanggapi</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            tbody.innerHTML = `<tr><td colspan="6" class="kosong" style="color:var(--merah-err);">Gagal memuat data dari server. Periksa koneksi atau URL Script.</td></tr>`;
+        });
+}
+
+// 5. Fungsi untuk menanggapi pengaduan (opsional jika script backend Anda mendukung aksi update baris)
+function tanggapiPengaduan(index, tanggapanLama) {
+    const inputTanggapan = prompt("Masukkan tanggapan atau balasan untuk pengaduan ini:", tanggapanLama);
+    if (inputTanggapan === null) return; // Jika dibatalkan
+
+    alert("Fitur simpan balasan langsung ke Google Sheets memerlukan fungsi doPost tambahan di Google Apps Script Anda. Pastikan script Anda mendukung pembaruan status!");
+}
+
+// Muat data saat halaman dibuka
+muatDataAdmin();
 </script>
 
 </body>
