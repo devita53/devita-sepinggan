@@ -44,13 +44,13 @@
         .grid-2{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.6rem;}
         
         /* ==== Styling Khusus Info Wilayah & Penduduk ==== */
-        .info-wilayah-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px, 1fr)); gap:1.2rem; margin-top:1.5rem;}
+        .info-wilayah-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px, 1fr)); gap:1.2rem; margin:1.5rem 0;}
         .info-box{background:var(--abu-lembut); border:1px solid #d4e2fc; border-radius:10px; padding:1.2rem; text-align:center; transition:.3s;}
         .info-box:hover{transform:translateY(-3px); box-shadow:0 6px 15px rgba(43,125,233,.1);}
         .info-box .icon{font-size:1.8rem; margin-bottom:.5rem;}
-        .info-box h4{color:var(--biru-tua); font-size:1rem; margin-bottom:.3rem;}
-        .info-box p{color:var(--teks); font-size:.95rem; font-weight:600;}
-        .catatan-penduduk{font-size:.85rem; color:#627494; text-align:center; margin-top:1.5rem; font-style:italic; background:#f7fafe; padding:.8rem; border-radius:8px; border:1px dashed #c7d7f5;}
+        .info-box h4{color:var(--biru-tua); font-size:0.95rem; margin-bottom:.3rem;}
+        .info-box p{color:var(--teks); font-size:0.9rem; font-weight:600;}
+        .catatan-penduduk{font-size:.85rem; color:#627494; text-align:center; margin-top:1.2rem; font-style:italic; background:#f7fafe; padding:.8rem; border-radius:8px; border:1px dashed #c7d7f5;}
 
         .pemisah{height:3px; background:linear-gradient(to right,transparent,var(--biru-med),transparent); border:none; margin:2.5rem auto; max-width:650px;}
         blockquote{border-left:4px solid var(--biru-med); padding-left:1.3rem; font-style:italic; color:#2c3e50; margin:1.2rem 0;}
@@ -97,33 +97,36 @@
 <section id="tentang">
     <h2>🌿 Mengenal Lebih Dekat Dusun Sepinggan Gelik</h2>
     <div class="grid-2">
+        <!-- KARTU 1: LOKASI & ALAM -->
         <div class="card">
-            <h3>📍 Di Mana Kami Berada?</h3>
-            <p><strong>Alamat Lengkap:</strong><br>
-            Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Provinsi Kalimantan Barat, Indonesia — Kode Pos 79453</p>
-            <p>Terletak di jalur yang mudah dijangkau, namun tetap menjaga suasana pedesaan yang tenang dan damai — jauh dari kebisingan kota, namun dekat dengan kehangatan sesama warga. Wilayah ini dikelilingi oleh hamparan sawah yang luas, aliran sungai yang jernih, serta pepohonan yang rindang meneduhkan setiap jengkal tanahnya.</p>
+            <h3>📍 Suasana & Lingkungan</h3>
+            <p>Terletak di jalur yang mudah dijangkau, namun tetap menjaga suasana pedesaan yang tenang dan damai — jauh dari kebisingan kota, namun dekat dengan kehangatan sesama warga.</p>
+            <p style="margin-top: 1rem;">Wilayah ini dikelilingi oleh hamparan sawah yang luas, aliran sungai yang jernih, serta pepohonan yang rindang meneduhkan setiap jengkal tanahnya. Udara pagi yang sejuk, pemandangan hijau yang menenangkan mata, serta langit yang bersih dari polusi adalah anugerah yang kami nikmati setiap hari.</p>
         </div>
+
+        <!-- KARTU 2: WARGA -->
         <div class="card">
             <h3>👥 Siapa Warga Kami?</h3>
-            <p>Warga Sepinggan Gelik adalah masyarakat yang sederhana, jujur, dan pekerja keras. Sebagian besar bermata pencaharian sebagai petani yang mencintai tanahnya, sebagian lagi berkebun, beternak, atau berdagang kecil-kecilan. Meski kehidupan sederhana, hati kami kaya dengan rasa syukur dan kebersamaan.</p>
-            <p>Nilai-nilai kekeluargaan masih sangat terjaga di sini. Tetangga bukan sekadar orang yang tinggal berdampingan, melainkan saudara yang saling peduli saat susah maupun senang.</p>
+            <p>Warga Sepinggan Gelik adalah masyarakat yang sederhana, jujur, dan pekerja keras. Sebagian besar bermata pencaharian sebagai petani yang mencintai tanahnya, sebagian lagi berkebun, beternak, atau berdagang kecil-kecilan.</p>
+            <p style="margin-top: 1rem;">Nilai kekeluargaan sangat terjaga di sini. Tetangga bukan sekadar orang yang tinggal berdampingan, melainkan saudara yang saling peduli saat susah maupun senang dalam ikatan gotong royong.</p>
         </div>
     </div>
 
-    <!-- TAMBAHAN BAGIAN INFORMASI WILAYAH & ESTIMASI PENDUDUK -->
+    <!-- KARTU 3: INFORMASI WILAYAH & PENDUDUK (GABUNGAN LENGKAP & RAPI) -->
     <div class="card" style="margin-top: 1.5rem;">
         <h3>📊 Informasi Wilayah & Kependudukan</h3>
-        <p>Dusun Sepinggan Gelik merupakan salah satu dari beberapa dusun yang ada di Desa Sepinggan, berdampingan dengan wilayah dusun lainnya seperti Sepinggan Kecil, Sepinggan Besar, Sepinggan Jirak, dan Sepinggan Suka Mantri.</p>
+        <p><strong>Alamat Administratif:</strong> Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Provinsi Kalimantan Barat — Kode Pos 79453.</p>
+        <p style="margin-top: .8rem; font-size: 0.95rem; color: #556580;">Dusun Sepinggan Gelik merupakan salah satu dari beberapa dusun di Desa Sepinggan, berdampingan dengan wilayah dusun lainnya seperti Sepinggan Kecil, Sepinggan Besar, Sepinggan Jirak, dan Sepinggan Suka Mantri.</p>
         
         <div class="info-wilayah-grid">
             <div class="info-box">
                 <div class="icon">🏛️</div>
-                <h4>Desa / Kecamatan</h4>
+                <h4>Administrasi Desa</h4>
                 <p>Desa Sepinggan, Kec. Semparuk</p>
             </div>
             <div class="info-box">
                 <div class="icon">📍</div>
-                <h4>Kabupaten / Provinsi</h4>
+                <h4>Wilayah</h4>
                 <p>Kab. Sambas, Kalimantan Barat</p>
             </div>
             <div class="info-box">
@@ -134,7 +137,7 @@
         </div>
 
         <div class="catatan-penduduk">
-            "Data tingkat dusun merupakan angka estimasi berdasarkan total penduduk Desa Sepinggan (6.240 jiwa - Disdukcapil Sambas). Untuk data jumlah penduduk yang paling akurat dan mutakhir hingga tingkat RT/RW di dusun ini, silakan tanyakan langsung melalui perangkat desa setempat di Kantor Desa Sepinggan."
+            "Data tingkat dusun merupakan angka estimasi berdasarkan total penduduk Desa Sepinggan (6.240 jiwa - Disdukcapil Sambas). Untuk data jumlah penduduk yang paling akurat dan mutakhir hingga tingkat RT/RW, silakan tanyakan langsung melalui perangkat desa di Kantor Desa Sepinggan."
         </div>
     </div>
 
