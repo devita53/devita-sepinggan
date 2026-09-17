@@ -78,7 +78,7 @@ if (sessionStorage.getItem("statusLoginAdmin") !== "sudah_login") {
 document.getElementById('btnKeluar').addEventListener('click', function() {
     sessionStorage.removeItem("statusLoginAdmin");
     window.location.href = "login.html";
-});
+} );
 
 // 3. Konfigurasi URL Google Apps Script yang sama
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLT_-Zn0wfkyFY4uTVTRfngiAr4KXFmeWsSAo-yitplaYX9qoIz-z_CZU_SBRwEpRx/exec";
@@ -120,7 +120,7 @@ function muatDataAdmin() {
                         <td><span class="badge ${badgeClass}">${statusTeks}</span></td>
                         <td>${tanggapanTeks}</td>
                         <td>
-                            <button class="btn-tanggapi" onclick="tanggapiPengaduan(${index}, '${escapeHtml(item.tanggapan || '')}')">Tanggapi</button>
+                            <button class="btn-tanggapi" onclick="tanggapiPengaduan(${item.row}, '${escapeHtml(item.tanggapan || '')}')">Tanggapi</button>
                         </td>
                     </tr>
                 `;
@@ -132,12 +132,35 @@ function muatDataAdmin() {
         });
 }
 
-// 5. Fungsi untuk menanggapi pengaduan (opsional jika script backend Anda mendukung aksi update baris)
-function tanggapiPengaduan(index, tanggapanLama) {
+// 5. Fungsi untuk mengirim tanggapan langsung ke Google Sheets
+function tanggapiPengaduan(rowNum, tanggapanLama) {
     const inputTanggapan = prompt("Masukkan tanggapan atau balasan untuk pengaduan ini:", tanggapanLama);
     if (inputTanggapan === null) return; // Jika dibatalkan
 
-    alert("Fitur simpan balasan langsung ke Google Sheets memerlukan fungsi doPost tambahan di Google Apps Script Anda. Pastikan script Anda mendukung pembaruan status!");
+    const formData = new FormData();
+    formData.append('action', 'tanggapi');
+    formData.append('row', rowNum);
+    formData.append('tanggapan', inputTanggapan);
+
+    alert("Menyimpan tanggapan ke server...");
+
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(result => {
+        if(result.result === "success") {
+            alert("Tanggapan berhasil disimpan!");
+            muatDataAdmin(); // Muat ulang tabel secara otomatis
+        } else {
+            alert("Gagal menyimpan tanggapan.");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Terjadi kesalahan koneksi.");
+    });
 }
 
 // Muat data saat halaman dibuka
