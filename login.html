@@ -1,70 +1,308 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin — Dusun Sepinggan Gelik</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
-        :root{
-            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
-            --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
-            --merah-err:#c0392b;
-        }
-        body{background:var(--biru-muda); color:var(--teks); display:flex; justify-content:center; align-items:center; min-height:100vh; padding:1rem;}
-        .login-card{background:var(--putih); border-radius:14px; padding:2.5rem 2rem; width:100%; max-width:400px; box-shadow:0 5px 18px rgba(43,125,233,.15);}
-        h2{color:var(--biru-tua); text-align:center; margin-bottom:.5rem; font-size:1.6rem;}
-        p{text-align:center; color:#7a8aa8; font-size:.9rem; margin-bottom:1.8rem;}
-        .form-group{display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.2rem;}
-        label{font-weight:600; font-size:.9rem; color:var(--biru-tua);}
-        input{padding:.8rem 1rem; border:1px solid #c7d7f5; border-radius:8px; font-size:1rem; background:var(--abu-lembut); color:var(--teks);}
-        input:focus{outline:none; border-color:var(--biru-med); background:var(--putih);}
-        button{width:100%; padding:.9rem; background:var(--biru-med); color:var(--putih); border:none; border-radius:8px; font-weight:600; font-size:1rem; cursor:pointer; transition:.3s; margin-top:.5rem;}
-        button:hover{background:var(--biru-tua);}
-        #pesan-error{color:var(--merah-err); text-align:center; font-size:.85rem; margin-top:1rem; min-height:1.2em;}
-        .back-link{display:block; text-align:center; margin-top:1.5rem; color:var(--biru-med); text-decoration:none; font-size:.9rem;}
-        .back-link:hover{text-decoration:underline;}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Admin — Dusun Sepinggan Gelik</title>
+
+<style>
+:root{
+    --biru-tua:#0b3d91;
+    --biru-med:#2b7de9;
+    --biru-muda:#e8f0fc;
+    --biru-cerah:#69b1ff;
+    --putih:#fff;
+    --abu-lembut:#f0f4fc;
+    --teks:#1a2b48;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Segoe UI',sans-serif;
+    background:
+        linear-gradient(
+            135deg,
+            var(--biru-tua),
+            var(--biru-med)
+        );
+    color:var(--teks);
+    padding:20px;
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+    background:white;
+    border-radius:16px;
+    padding:2.5rem;
+    box-shadow:0 15px 50px rgba(0,0,0,.2);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:2rem;
+}
+
+.logo-icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--biru-muda);
+    font-size:2rem;
+}
+
+.logo h1{
+    color:var(--biru-tua);
+    font-size:1.5rem;
+    margin-top:1rem;
+}
+
+.logo p{
+    color:#68778d;
+    font-size:.9rem;
+}
+
+.form-group{
+    margin-bottom:1.2rem;
+}
+
+label{
+    display:block;
+    font-weight:600;
+    color:var(--biru-tua);
+    margin-bottom:.4rem;
+}
+
+input{
+    width:100%;
+    padding:.9rem 1rem;
+    border:1px solid #cbd9ef;
+    border-radius:9px;
+    font-family:inherit;
+    font-size:1rem;
+    outline:none;
+}
+
+input:focus{
+    border-color:var(--biru-med);
+    box-shadow:0 0 0 3px rgba(43,125,233,.12);
+}
+
+.btn{
+    width:100%;
+    border:0;
+    padding:.9rem;
+    border-radius:50px;
+    background:var(--biru-tua);
+    color:white;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:var(--biru-med);
+    transform:translateY(-2px);
+}
+
+.error{
+    display:none;
+    background:#f8d7da;
+    color:#842029;
+    padding:.8rem 1rem;
+    border-radius:9px;
+    margin-bottom:1rem;
+    font-size:.9rem;
+}
+
+.error.show{
+    display:block;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:1.5rem;
+    color:var(--biru-med);
+    text-decoration:none;
+}
+
+.back:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:480px){
+
+    .login-card{
+        padding:2rem 1.3rem;
+    }
+
+}
+</style>
 </head>
+
 <body>
 
 <div class="login-card">
-    <h2>🔐 Login Pengurus</h2>
-    <p>Masukkan sandi admin untuk mengelola pengaduan</p>
-    
-    <form id="form-login">
-        <div class="form-group">
-            <label>Kata Sandi Admin</label>
-            <input type="password" id="sandi" placeholder="Masukkan sandi..." required>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🛠️
         </div>
-        <button type="submit">Masuk Panel</button>
+
+        <h1>
+            Admin Dusun Sepinggan Gelik
+        </h1>
+
+        <p>
+            Silakan masuk untuk mengelola pengaduan warga
+        </p>
+
+    </div>
+
+
+    <div
+        class="error"
+        id="errorMessage"
+    >
+        Username atau password salah.
+    </div>
+
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                autocomplete="username"
+                placeholder="Masukkan username"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                autocomplete="current-password"
+                placeholder="Masukkan password"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn"
+        >
+            🔐 Masuk
+        </button>
+
     </form>
 
-    <div id="pesan-error"></div>
-    <a href="kontak.html" class="back-link">&larr; Kembali ke Beranda Utama</a>
+
+    <a
+        href="index.html"
+        class="back"
+    >
+        ← Kembali ke Beranda
+    </a>
+
 </div>
 
+
 <script>
-const formLogin = document.getElementById('form-login');
-const pesanError = document.getElementById('pesan-error');
 
-formLogin.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const inputSandi = document.getElementById('sandi').value.trim();
-    
-    // GANTI KATA SANDI DI BAWAH INI SESUAI KEINGINAN ANDA
-    const SANDI_RAHASIA = "devita53"; 
+const USERNAME = "admin";
+const PASSWORD = "admin123";
 
-    if (inputSandi === SANDI_RAHASIA) {
-        // Simpan izin masuk ke memori browser sementara
-        sessionStorage.setItem("statusLoginAdmin", "sudah_login");
-        // Alihkan langsung ke halaman admin
-        window.location.href = "admin.html";
-    } else {
-        pesanError.textContent = "Kata sandi salah! Silakan coba lagi.";
-        document.getElementById('sandi').value = "";
+
+document.getElementById(
+    "loginForm"
+).addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+
+        const username =
+            document.getElementById(
+                "username"
+            ).value.trim();
+
+        const password =
+            document.getElementById(
+                "password"
+            ).value;
+
+
+        const error =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        if(
+            username === USERNAME &&
+            password === PASSWORD
+        ){
+
+            /*
+             * Tandai bahwa admin sudah login.
+             */
+
+            sessionStorage.setItem(
+                "adminLogin",
+                "true"
+            );
+
+
+            window.location.href =
+                "admin.html";
+
+        }
+        else{
+
+            error.classList.add(
+                "show"
+            );
+
+        }
+
     }
-});
+);
+
 </script>
 
 </body>

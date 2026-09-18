@@ -1,170 +1,2487 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admin — Dusun Sepinggan Gelik</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
-        :root{
-            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
-            --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
-            --merah-err:#c0392b; --hijau:#27ae60; --kuning-pending:#d35400;
-        }
-        body{background:var(--biru-muda); color:var(--teks); padding:2rem 1rem;}
-        .container{max-width:1000px; margin:0 auto;}
-        .header-panel{background:var(--putih); padding:1.5rem 2rem; border-radius:12px; box-shadow:0 4px 15px rgba(43,125,233,.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;}
-        .header-panel h2{color:var(--biru-tua); font-size:1.4rem;}
-        .btn-keluar{background:var(--merah-err); color:var(--putih); border:none; padding:.6rem 1.2rem; border-radius:6px; cursor:pointer; font-weight:600; transition:.2s;}
-        .btn-keluar:hover{opacity:.85;}
-        
-        .card{background:var(--putih); border-radius:12px; padding:2rem; box-shadow:0 4px 15px rgba(43,125,233,.1);}
-        .card h3{color:var(--biru-tua); margin-bottom:1rem; font-size:1.2rem;}
-        
-        table{width:100%; border-collapse:collapse; margin-top:1rem;}
-        th, td{padding:.9rem; text-align:left; border-bottom:1px solid #e1eafc; font-size:.95rem; vertical-align:middle;}
-        th{background:var(--abu-lembut); color:var(--biru-tua); font-weight:600;}
-        tr:hover{background:#f8fbff;}
-        .kosong{text-align:center; color:#7a8aa8; padding:2rem; font-style:italic;}
-        
-        .badge{font-size:.78rem; padding:.25rem .7rem; border-radius:20px; font-weight:600; display:inline-block;}
-        .badge.belum{background:#fdebd0; color:var(--kuning-pending);}
-        .badge.sudah{background:#d4efdf; color:var(--hijau);}
-        
-        .btn-tanggapi{background:var(--biru-med); color:var(--putih); border:none; padding:.4rem .8rem; border-radius:6px; cursor:pointer; font-size:.85rem; font-weight:600; transition:.2s;}
-        .btn-tanggapi:hover{background:var(--biru-tua);}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Pengaduan — Dusun Sepinggan Gelik</title>
+
+<style>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root{
+    --biru-tua:#0b3d91;
+    --biru-med:#2b7de9;
+    --biru-muda:#e8f0fc;
+    --biru-cerah:#69b1ff;
+    --putih:#fff;
+    --abu-lembut:#f0f4fc;
+    --teks:#1a2b48;
+
+    --kuning:#d4ac0d;
+    --merah:#dc3545;
+    --hijau:#20c997;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:var(--biru-muda);
+    color:var(--teks);
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    background:
+        linear-gradient(
+            135deg,
+            var(--biru-tua),
+            var(--biru-med)
+        );
+
+    color:white;
+
+    padding:1rem 5%;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.15);
+}
+
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:1rem;
+}
+
+
+.logo{
+    font-size:1.3rem;
+    font-weight:700;
+}
+
+
+.nav-actions{
+    display:flex;
+    gap:.6rem;
+}
+
+
+.nav-btn{
+    border:0;
+
+    color:white;
+
+    background:rgba(255,255,255,.18);
+
+    padding:.55rem 1rem;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+
+.nav-btn:hover{
+    background:rgba(255,255,255,.3);
+
+    transform:translateY(-1px);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main{
+    width:100%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:3rem 2rem 4rem;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title{
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:1rem;
+
+    margin-bottom:1.8rem;
+
+    flex-wrap:wrap;
+}
+
+
+.page-title h1{
+    color:var(--biru-tua);
+
+    font-size:2rem;
+
+    line-height:1.2;
+
+    margin-bottom:.3rem;
+}
+
+
+.page-title p{
+    color:#68778d;
+
+    font-size:.95rem;
+}
+
+
+.last-update{
+    font-size:.75rem;
+
+    color:#7a899e;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+    display:none;
+
+    padding:1rem;
+
+    border-radius:10px;
+
+    margin-bottom:1.2rem;
+}
+
+
+.message.show{
+    display:block;
+}
+
+
+.message.error{
+    background:#f8d7da;
+
+    color:#842029;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:1.2rem;
+
+    margin-bottom:1.5rem;
+}
+
+
+.stat{
+    background:white;
+
+    border-radius:14px;
+
+    padding:1.35rem 1.4rem;
+
+    box-shadow:
+        0 8px 25px rgba(11,61,145,.10);
+
+    border-top:4px solid var(--biru-med);
+
+    min-height:125px;
+
+    transition:.2s;
+}
+
+
+.stat:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 12px 28px rgba(11,61,145,.14);
+}
+
+
+.stat-label{
+    display:flex;
+
+    align-items:center;
+
+    gap:.55rem;
+
+    color:#68778d;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    margin-bottom:.4rem;
+}
+
+
+.stat-icon{
+    width:30px;
+
+    height:30px;
+
+    border-radius:8px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--biru-muda);
+
+    color:var(--biru-med);
+
+    font-size:.9rem;
+}
+
+
+.stat-number{
+    font-size:2rem;
+
+    line-height:1.1;
+
+    font-weight:700;
+
+    color:var(--biru-tua);
+}
+
+
+.stat-small{
+    color:#8a97a8;
+
+    font-size:.72rem;
+
+    margin-top:.25rem;
+}
+
+
+/* =====================================================
+   DASHBOARD GRID
+===================================================== */
+
+.dashboard-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:1.2rem;
+
+    margin-bottom:1.5rem;
+}
+
+
+.panel{
+    background:white;
+
+    border-radius:14px;
+
+    padding:1.5rem;
+
+    box-shadow:
+        0 8px 25px rgba(11,61,145,.10);
+}
+
+
+.panel-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:1rem;
+
+    margin-bottom:1.3rem;
+}
+
+
+.panel-header h2{
+    color:var(--biru-tua);
+
+    font-size:1.15rem;
+
+    line-height:1.3;
+}
+
+
+.panel-header small{
+    color:#8491a3;
+
+    font-size:.72rem;
+}
+
+
+/* =====================================================
+   DONUT CHART
+===================================================== */
+
+.chart-area{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:2.5rem;
+
+    min-height:230px;
+}
+
+
+.donut{
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            #e8f0fc 0deg,
+            #e8f0fc 360deg
+        );
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+
+.donut::after{
+    content:"";
+
+    position:absolute;
+
+    width:105px;
+
+    height:105px;
+
+    background:white;
+
+    border-radius:50%;
+}
+
+
+.donut-center{
+    position:absolute;
+
+    z-index:2;
+
+    text-align:center;
+}
+
+
+.donut-number{
+    display:block;
+
+    font-size:1.7rem;
+
+    font-weight:700;
+
+    color:var(--biru-tua);
+
+    line-height:1;
+}
+
+
+.donut-text{
+    font-size:.7rem;
+
+    color:#7b899a;
+
+    margin-top:.25rem;
+}
+
+
+.legend{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.65rem;
+}
+
+
+.legend-item{
+    display:flex;
+
+    align-items:center;
+
+    gap:.55rem;
+
+    font-size:.8rem;
+
+    color:#59697e;
+}
+
+
+.legend-dot{
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+}
+
+
+.legend-count{
+    margin-left:auto;
+
+    font-weight:700;
+
+    color:var(--teks);
+}
+
+
+/* =====================================================
+   RECENT COMPLAINTS
+===================================================== */
+
+.recent-list{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.65rem;
+
+    max-height:250px;
+
+    overflow-y:auto;
+}
+
+
+.recent-item{
+    border:1px solid #d8e6fa;
+
+    background:#f9fbff;
+
+    border-radius:10px;
+
+    padding:.75rem .85rem;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:.8rem;
+
+    transition:.2s;
+}
+
+
+.recent-item:hover{
+    background:#f1f7ff;
+
+    border-color:var(--biru-cerah);
+}
+
+
+.recent-info{
+    min-width:0;
+}
+
+
+.recent-title{
+    color:var(--biru-tua);
+
+    font-weight:700;
+
+    font-size:.82rem;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+.recent-code{
+    color:#7d8da2;
+
+    font-size:.68rem;
+
+    margin-top:.1rem;
+}
+
+
+.recent-status{
+    flex-shrink:0;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status{
+    display:inline-block;
+
+    padding:.25rem .65rem;
+
+    border-radius:20px;
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    text-transform:capitalize;
+
+    white-space:nowrap;
+}
+
+
+.status-baru{
+    background:#e8f0fc;
+
+    color:var(--biru-tua);
+}
+
+
+.status-diproses{
+    background:#fff3cd;
+
+    color:#856404;
+}
+
+
+.status-selesai{
+    background:#d1e7dd;
+
+    color:#0f5132;
+}
+
+
+.status-ditolak{
+    background:#f8d7da;
+
+    color:#842029;
+}
+
+
+/* =====================================================
+   MANAGEMENT PANEL
+===================================================== */
+
+.management-panel{
+    padding:0;
+
+    overflow:hidden;
+}
+
+
+.management-header{
+    padding:1.4rem 1.5rem;
+
+    border-bottom:1px solid #e2eaf6;
+}
+
+
+.management-title{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:1rem;
+
+    margin-bottom:1rem;
+
+    flex-wrap:wrap;
+}
+
+
+.management-title h2{
+    color:var(--biru-tua);
+
+    font-size:1.2rem;
+}
+
+
+.management-title p{
+    color:#7b899a;
+
+    font-size:.75rem;
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.controls{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:.7rem;
+
+    flex-wrap:wrap;
+}
+
+
+.control-left{
+    display:flex;
+
+    gap:.6rem;
+
+    flex-wrap:wrap;
+}
+
+
+select,
+.search-input{
+    padding:.65rem .8rem;
+
+    border:1px solid #cbd9ef;
+
+    border-radius:8px;
+
+    font-family:inherit;
+
+    font-size:.82rem;
+
+    outline:none;
+
+    background:white;
+
+    color:var(--teks);
+
+    transition:.2s;
+}
+
+
+.search-input{
+    width:250px;
+}
+
+
+select:focus,
+.search-input:focus{
+    border-color:var(--biru-med);
+
+    box-shadow:
+        0 0 0 3px rgba(43,125,233,.10);
+}
+
+
+.btn{
+    border:0;
+
+    background:var(--biru-tua);
+
+    color:white;
+
+    padding:.65rem 1rem;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+
+.btn:hover{
+    background:var(--biru-med);
+
+    transform:translateY(-1px);
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:950px;
+}
+
+
+thead{
+    background:#f4f8ff;
+
+    color:var(--biru-tua);
+}
+
+
+th,
+td{
+    padding:.9rem 1rem;
+
+    text-align:left;
+
+    border-bottom:1px solid #e0e8f5;
+
+    font-size:.8rem;
+}
+
+
+th{
+    font-size:.7rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.03em;
+
+    font-weight:700;
+}
+
+
+tbody tr{
+    transition:.15s;
+}
+
+
+tbody tr:hover{
+    background:#f7faff;
+}
+
+
+td strong{
+    color:var(--biru-med);
+
+    font-size:.75rem;
+}
+
+
+.action-cell{
+    white-space:nowrap;
+}
+
+
+.detail-btn{
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:#e8f0fc;
+
+    color:var(--biru-tua);
+
+    padding:.35rem .65rem;
+
+    border-radius:6px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    margin-right:.25rem;
+
+    transition:.2s;
+}
+
+
+.detail-btn:hover{
+    background:var(--biru-med);
+
+    color:white;
+}
+
+
+/* =====================================================
+   LOADING / EMPTY
+===================================================== */
+
+.loading{
+    text-align:center;
+
+    padding:3rem 1rem;
+
+    color:var(--biru-tua);
+
+    font-weight:600;
+}
+
+
+.empty{
+    text-align:center;
+
+    padding:3rem 1rem;
+
+    color:#68778d;
+}
+
+
+/* =====================================================
+   RESPONSIVE TABLET
+===================================================== */
+
+@media(max-width:950px){
+
+    .stats{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+
+    .chart-area{
+        min-height:250px;
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    header{
+        padding:1rem 4%;
+    }
+
+
+    .nav{
+        align-items:flex-start;
+    }
+
+
+    .logo{
+        font-size:1rem;
+    }
+
+
+    .nav-actions{
+        gap:.35rem;
+    }
+
+
+    .nav-btn{
+        padding:.45rem .65rem;
+
+        font-size:.72rem;
+    }
+
+
+    main{
+        padding:2rem 4% 3rem;
+    }
+
+
+    .page-title{
+        margin-bottom:1.4rem;
+    }
+
+
+    .page-title h1{
+        font-size:1.6rem;
+    }
+
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:.8rem;
+    }
+
+
+    .stat{
+        padding:1rem;
+
+        min-height:110px;
+    }
+
+
+    .stat-number{
+        font-size:1.7rem;
+    }
+
+
+    .dashboard-grid{
+        gap:.9rem;
+    }
+
+
+    .panel{
+        padding:1rem;
+    }
+
+
+    .chart-area{
+        flex-direction:column;
+
+        gap:1.5rem;
+    }
+
+
+    .donut{
+        width:150px;
+
+        height:150px;
+    }
+
+
+    .legend{
+        width:100%;
+    }
+
+
+    .search-input{
+        width:100%;
+    }
+
+
+    .control-left{
+        width:100%;
+    }
+
+
+    select{
+        width:100%;
+    }
+
+
+    .controls{
+        align-items:stretch;
+    }
+
+
+    .controls .btn{
+        width:100%;
+    }
+
+}
+
+</style>
 </head>
+
+
 <body>
 
-<div class="container">
-    <div class="header-panel">
-        <h2>🛠️ Panel Pengurus Dusun Sepinggan Gelik</h2>
-        <button class="btn-keluar" id="btnKeluar">Keluar (Logout)</button>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+            🛠️ Admin Sepinggan Gelik
+        </div>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="nav-btn"
+                onclick="window.location.href='index.html'"
+            >
+                🏠 Beranda
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="logout()"
+            >
+                🚪 Logout
+            </button>
+
+        </div>
+
     </div>
 
-    <div class="card">
-        <h3>📩 Daftar Pengaduan & Aspirasi Warga</h3>
-        <p style="color:#627494; font-size:.9rem;">Kelola dan berikan tanggapan untuk setiap laporan yang dikirimkan warga melalui website.</p>
-        
-        <div style="overflow-x:auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama & Lokasi</th>
-                        <th>Isi Pengaduan</th>
-                        <th>Status</th>
-                        <th>Tanggapan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="tabel-pengaduan">
-                    <tr><td colspan="6" class="kosong">Memuat data pengaduan dari server...</td></tr>
-                </tbody>
-            </table>
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+    <!-- TITLE -->
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>
+                Dashboard Pengaduan
+            </h1>
+
+            <p>
+                Kelola pengaduan warga Dusun Sepinggan Gelik.
+            </p>
+
         </div>
+
+
+        <div class="last-update">
+
+            Terakhir diperbarui:
+            <span id="lastUpdate">
+                -
+            </span>
+
+        </div>
+
     </div>
-</div>
+
+
+
+    <!-- ERROR -->
+
+    <div
+        class="message"
+        id="errorMessage"
+    ></div>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================= -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                Total Pengaduan
+
+            </div>
+
+
+            <div
+                class="stat-number"
+                id="total"
+            >
+                0
+            </div>
+
+
+            <div class="stat-small">
+                Semua pengaduan warga
+            </div>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                <div class="stat-icon">
+                    📢
+                </div>
+
+                Pengaduan Baru
+
+            </div>
+
+
+            <div
+                class="stat-number"
+                id="baru"
+            >
+                0
+            </div>
+
+
+            <div class="stat-small">
+                Menunggu diproses
+            </div>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                <div class="stat-icon">
+                    🔄
+                </div>
+
+                Diproses
+
+            </div>
+
+
+            <div
+                class="stat-number"
+                id="diproses"
+            >
+                0
+            </div>
+
+
+            <div class="stat-small">
+                Sedang ditangani
+            </div>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                Selesai
+
+            </div>
+
+
+            <div
+                class="stat-number"
+                id="selesai"
+            >
+                0
+            </div>
+
+
+            <div class="stat-small">
+                Pengaduan selesai
+            </div>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                <div class="stat-icon">
+                    ✕
+                </div>
+
+                Ditolak
+
+            </div>
+
+
+            <div
+                class="stat-number"
+                id="ditolak"
+            >
+                0
+            </div>
+
+
+            <div class="stat-small">
+                Pengaduan ditolak
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         CHART + RECENT
+    ================================================= -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- CHART -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    Status Pengaduan
+                </h2>
+
+                <small>
+                    Statistik saat ini
+                </small>
+
+            </div>
+
+
+            <div class="chart-area">
+
+
+                <div
+                    class="donut"
+                    id="donutChart"
+                >
+
+                    <div class="donut-center">
+
+                        <span
+                            class="donut-number"
+                            id="donutTotal"
+                        >
+                            0
+                        </span>
+
+                        <span class="donut-text">
+                            Pengaduan
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="legend">
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#2b7de9"
+                        ></span>
+
+                        Baru
+
+                        <span
+                            class="legend-count"
+                            id="legendBaru"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#69b1ff"
+                        ></span>
+
+                        Diproses
+
+                        <span
+                            class="legend-count"
+                            id="legendDiproses"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#20c997"
+                        ></span>
+
+                        Selesai
+
+                        <span
+                            class="legend-count"
+                            id="legendSelesai"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#dc3545"
+                        ></span>
+
+                        Ditolak
+
+                        <span
+                            class="legend-count"
+                            id="legendDitolak"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RECENT -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    Pengaduan Terbaru
+                </h2>
+
+                <small>
+                    5 terakhir
+                </small>
+
+            </div>
+
+
+            <div
+                class="recent-list"
+                id="recentList"
+            >
+
+                <div class="loading">
+                    ⏳ Memuat data...
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MANAGEMENT
+    ================================================= -->
+
+    <div class="panel management-panel">
+
+
+        <div class="management-header">
+
+
+            <div class="management-title">
+
+                <div>
+
+                    <h2>
+                        Kelola Pengaduan Warga
+                    </h2>
+
+                    <p>
+                        Daftar seluruh laporan yang masuk
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="controls">
+
+
+                <div class="control-left">
+
+                    <select
+                        id="filterStatus"
+                    >
+
+                        <option value="semua">
+                            Semua Status
+                        </option>
+
+                        <option value="baru">
+                            Baru
+                        </option>
+
+                        <option value="diproses">
+                            Diproses
+                        </option>
+
+                        <option value="selesai">
+                            Selesai
+                        </option>
+
+                        <option value="ditolak">
+                            Ditolak
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="🔎 Cari kode, nama, judul..."
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn"
+                    onclick="loadData()"
+                >
+                    🔄 Refresh Data
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div
+            class="table-wrapper"
+            id="tableWrapper"
+        >
+
+            <div class="loading">
+                ⏳ Memuat data...
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
 
 <script>
-// 1. Cek apakah admin sudah login
-if (sessionStorage.getItem("statusLoginAdmin") !== "sudah_login") {
-    alert("Anda belum login! Silakan login terlebih dahulu.");
-    window.location.href = "login.html";
+
+/* =====================================================
+   LOGIN PROTECTION
+===================================================== */
+
+if(
+    sessionStorage.getItem(
+        "adminLogin"
+    ) !== "true"
+){
+
+    window.location.href =
+        "login.html";
+
 }
 
-// 2. Tombol Keluar (Logout)
-document.getElementById('btnKeluar').addEventListener('click', function() {
-    sessionStorage.removeItem("statusLoginAdmin");
-    window.location.href = "login.html";
-} );
 
-// 3. Konfigurasi URL Google Apps Script yang sama
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLT_-Zn0wfkyFY4uTVTRfngiAr4KXFmeWsSAo-yitplaYX9qoIz-z_CZU_SBRwEpRx/exec";
-const tbody = document.getElementById('tabel-pengaduan');
+/* =====================================================
+   API
+===================================================== */
 
-function escapeHtml(str) {
-    if (!str) return '';
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx1tklJcBaQGLEf5eoKJ2L-xqRlE756KhWGAZip6zOwTeyMbuwYYXNK7e8P8bW_J7q9NA/exec";
+
+
+let semuaData = [];
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    sessionStorage.removeItem(
+        "adminLogin"
+    );
+
+    window.location.href =
+        "login.html";
+
 }
 
-// 4. Ambil dan tampilkan data dari Google Sheets
-function muatDataAdmin() {
-    fetch(SCRIPT_URL)
-        .then(res => res.json())
-        .then(data => {
-            if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="kosong">Belum ada pengaduan atau aspirasi masuk.</td></tr>`;
-                return;
+
+/* =====================================================
+   JSONP
+===================================================== */
+
+function jsonpRequest(
+    params,
+    timeout=8000,
+    retries=3
+){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            let attempt=0;
+
+
+            function request(){
+
+                attempt++;
+
+
+                const callbackName =
+                    "adminCallback_" +
+                    Date.now() +
+                    "_" +
+                    Math.floor(
+                        Math.random()*100000
+                    );
+
+
+                let script=null;
+
+                let timer=null;
+
+                let finished=false;
+
+
+                function cleanup(){
+
+                    if(timer)
+                        clearTimeout(timer);
+
+
+                    if(script)
+                        script.remove();
+
+
+                    try{
+
+                        delete window[
+                            callbackName
+                        ];
+
+                    }
+                    catch(error){
+
+                        window[
+                            callbackName
+                        ]=undefined;
+
+                    }
+
+                }
+
+
+                window[
+                    callbackName
+                ]=function(data){
+
+                    if(finished)
+                        return;
+
+
+                    finished=true;
+
+                    cleanup();
+
+                    resolve(data);
+
+                };
+
+
+                const query =
+                    new URLSearchParams(
+                        params
+                    );
+
+
+                query.set(
+                    "callback",
+                    callbackName
+                );
+
+
+                query.set(
+                    "_",
+                    Date.now()
+                );
+
+
+                script =
+                    document.createElement(
+                        "script"
+                    );
+
+
+                script.src =
+                    API_URL +
+                    "?" +
+                    query.toString();
+
+
+                script.onerror=function(){
+
+                    if(finished)
+                        return;
+
+
+                    finished=true;
+
+                    cleanup();
+
+
+                    if(
+                        attempt <
+                        retries
+                    ){
+
+                        setTimeout(
+                            request,
+                            500
+                        );
+
+                    }
+                    else{
+
+                        reject(
+                            new Error(
+                                "Gagal menghubungi server."
+                            )
+                        );
+
+                    }
+
+                };
+
+
+                timer =
+                    setTimeout(
+                        ()=>{
+
+                            if(finished)
+                                return;
+
+
+                            finished=true;
+
+                            cleanup();
+
+
+                            if(
+                                attempt <
+                                retries
+                            ){
+
+                                setTimeout(
+                                    request,
+                                    500
+                                );
+
+                            }
+                            else{
+
+                                reject(
+                                    new Error(
+                                        "Server terlalu lama merespons."
+                                    )
+                                );
+
+                            }
+
+                        },
+                        timeout
+                    );
+
+
+                document.body.appendChild(
+                    script
+                );
+
             }
-            
-            tbody.innerHTML = "";
-            data.forEach((item, index) => {
-                const statusSudah = item.status === "Sudah Ditanggapi";
-                const badgeClass = statusSudah ? "sudah" : "belum";
-                const statusTeks = item.status || "Belum Ditanggapi";
-                const tanggapanTeks = item.tanggapan ? escapeHtml(item.tanggapan) : '<span style="color:#999; font-style:italic;">Belum ada tanggapan</span>';
 
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>
-                            <strong>${escapeHtml(item.nama)}</strong><br>
-                            <span style="font-size:0.85rem; color:#627494;">📍 ${escapeHtml(item.lokasi)}</span><br>
-                            <span style="font-size:0.75rem; color:#9a8aa8;">📅 ${escapeHtml(item.waktu)}</span>
-                        </td>
-                        <td>${escapeHtml(item.pesan)}</td>
-                        <td><span class="badge ${badgeClass}">${statusTeks}</span></td>
-                        <td>${tanggapanTeks}</td>
-                        <td>
-                            <button class="btn-tanggapi" onclick="tanggapiPengaduan(${item.row}, '${escapeHtml(item.tanggapan || '')}')">Tanggapi</button>
-                        </td>
-                    </tr>
-                `;
-            });
-        })
-        .catch(err => {
-            console.error(err);
-            tbody.innerHTML = `<tr><td colspan="6" class="kosong" style="color:var(--merah-err);">Gagal memuat data dari server. Periksa koneksi atau URL Script.</td></tr>`;
-        });
-}
 
-// 5. Fungsi untuk mengirim tanggapan langsung ke Google Sheets
-function tanggapiPengaduan(rowNum, tanggapanLama) {
-    const inputTanggapan = prompt("Masukkan tanggapan atau balasan untuk pengaduan ini:", tanggapanLama);
-    if (inputTanggapan === null) return; // Jika dibatalkan
+            request();
 
-    const formData = new FormData();
-    formData.append('action', 'tanggapi');
-    formData.append('row', rowNum);
-    formData.append('tanggapan', inputTanggapan);
-
-    alert("Menyimpan tanggapan ke server...");
-
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: formData
-    })
-    .then(res => res.json())
-    .then(result => {
-        if(result.result === "success") {
-            alert("Tanggapan berhasil disimpan!");
-            muatDataAdmin(); // Muat ulang tabel secara otomatis
-        } else {
-            alert("Gagal menyimpan tanggapan.");
         }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Terjadi kesalahan koneksi.");
-    });
+    );
+
 }
 
-// Muat data saat halaman dibuka
-muatDataAdmin();
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function loadData(){
+
+    const wrapper =
+        document.getElementById(
+            "tableWrapper"
+        );
+
+
+    const error =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    wrapper.innerHTML =
+        '<div class="loading">⏳ Memuat data...</div>';
+
+
+    error.className =
+        "message";
+
+
+    try{
+
+        const result =
+            await jsonpRequest(
+                {
+                    action:"semua"
+                },
+                8000,
+                3
+            );
+
+
+        if(
+            !result ||
+            !result.success
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Gagal mengambil data."
+            );
+
+        }
+
+
+        semuaData =
+            result.data || [];
+
+
+        updateStats();
+
+        updateChart();
+
+        renderRecent();
+
+        renderTable();
+
+
+        document.getElementById(
+            "lastUpdate"
+        ).textContent =
+            new Date().toLocaleString(
+                "id-ID"
+            );
+
+    }
+    catch(err){
+
+        error.textContent =
+            err.message;
+
+        error.className =
+            "message show error";
+
+
+        wrapper.innerHTML =
+            '<div class="empty">❌ Gagal memuat data.</div>';
+
+
+        document.getElementById(
+            "recentList"
+        ).innerHTML =
+            '<div class="empty">❌ Gagal memuat data.</div>';
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE STATS
+===================================================== */
+
+function getCounts(){
+
+    const count = {
+
+        baru:0,
+
+        diproses:0,
+
+        selesai:0,
+
+        ditolak:0
+
+    };
+
+
+    semuaData.forEach(
+        item=>{
+
+            const status =
+                String(
+                    item.status || ""
+                ).toLowerCase();
+
+
+            if(
+                count[
+                    status
+                ] !== undefined
+            ){
+
+                count[
+                    status
+                ]++;
+
+            }
+
+        }
+    );
+
+
+    return count;
+
+}
+
+
+function updateStats(){
+
+    const count =
+        getCounts();
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        semuaData.length;
+
+
+    document.getElementById(
+        "baru"
+    ).textContent =
+        count.baru;
+
+
+    document.getElementById(
+        "diproses"
+    ).textContent =
+        count.diproses;
+
+
+    document.getElementById(
+        "selesai"
+    ).textContent =
+        count.selesai;
+
+
+    document.getElementById(
+        "ditolak"
+    ).textContent =
+        count.ditolak;
+
+}
+
+
+/* =====================================================
+   UPDATE CHART
+===================================================== */
+
+function updateChart(){
+
+    const count =
+        getCounts();
+
+
+    const total =
+        semuaData.length;
+
+
+    document.getElementById(
+        "donutTotal"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "legendBaru"
+    ).textContent =
+        count.baru;
+
+
+    document.getElementById(
+        "legendDiproses"
+    ).textContent =
+        count.diproses;
+
+
+    document.getElementById(
+        "legendSelesai"
+    ).textContent =
+        count.selesai;
+
+
+    document.getElementById(
+        "legendDitolak"
+    ).textContent =
+        count.ditolak;
+
+
+    const donut =
+        document.getElementById(
+            "donutChart"
+        );
+
+
+    if(!total){
+
+        donut.style.background =
+            "#e8f0fc";
+
+        return;
+
+    }
+
+
+    const baruDeg =
+        count.baru / total * 360;
+
+
+    const diprosesDeg =
+        count.diproses / total * 360;
+
+
+    const selesaiDeg =
+        count.selesai / total * 360;
+
+
+    const start1 = 0;
+
+    const end1 =
+        baruDeg;
+
+
+    const start2 =
+        end1;
+
+
+    const end2 =
+        start2 + diprosesDeg;
+
+
+    const start3 =
+        end2;
+
+
+    const end3 =
+        start3 + selesaiDeg;
+
+
+    const start4 =
+        end3;
+
+
+    donut.style.background =
+        `conic-gradient(
+            #2b7de9 ${start1}deg ${end1}deg,
+            #69b1ff ${start2}deg ${end2}deg,
+            #20c997 ${start3}deg ${end3}deg,
+            #dc3545 ${start4}deg 360deg
+        )`;
+
+}
+
+
+/* =====================================================
+   RECENT DATA
+===================================================== */
+
+function renderRecent(){
+
+    const container =
+        document.getElementById(
+            "recentList"
+        );
+
+
+    if(!semuaData.length){
+
+        container.innerHTML =
+            '<div class="empty">Belum ada pengaduan.</div>';
+
+        return;
+
+    }
+
+
+    const data =
+        [...semuaData]
+        .reverse()
+        .slice(0,5);
+
+
+    let html = "";
+
+
+    data.forEach(
+        item=>{
+
+            const status =
+                String(
+                    item.status ||
+                    "baru"
+                ).toLowerCase();
+
+
+            html += `
+
+                <div class="recent-item">
+
+                    <div class="recent-info">
+
+                        <div class="recent-title">
+
+                            ${escapeHTML(
+                                item.judul ||
+                                "Tanpa judul"
+                            )}
+
+                        </div>
+
+
+                        <div class="recent-code">
+
+                            ${escapeHTML(
+                                item.kode
+                            )}
+
+                            •
+                            
+                            ${escapeHTML(
+                                item.nama
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="recent-status">
+
+                        <span
+                            class="status status-${status}"
+                        >
+
+                            ${escapeHTML(
+                                status
+                            )}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   RENDER TABLE
+===================================================== */
+
+function renderTable(){
+
+    const wrapper =
+        document.getElementById(
+            "tableWrapper"
+        );
+
+
+    const filter =
+        document.getElementById(
+            "filterStatus"
+        ).value;
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    let data =
+        semuaData;
+
+
+    /* FILTER STATUS */
+
+    if(
+        filter !== "semua"
+    ){
+
+        data =
+            data.filter(
+                item =>
+                    String(
+                        item.status || ""
+                    ).toLowerCase() ===
+                    filter
+            );
+
+    }
+
+
+    /* SEARCH */
+
+    if(search){
+
+        data =
+            data.filter(
+                item => {
+
+                    const text =
+                        [
+                            item.kode,
+                            item.nama,
+                            item.kategori,
+                            item.judul,
+                            item.tanggal
+                        ]
+                        .join(" ")
+                        .toLowerCase();
+
+
+                    return text.includes(
+                        search
+                    );
+
+                }
+            );
+
+    }
+
+
+    if(!data.length){
+
+        wrapper.innerHTML =
+            '<div class="empty">Belum ada pengaduan yang sesuai.</div>';
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Kode</th>
+
+                    <th>Nama</th>
+
+                    <th>Kategori</th>
+
+                    <th>Judul</th>
+
+                    <th>Tanggal</th>
+
+                    <th>Status</th>
+
+                    <th>Aksi</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+    `;
+
+
+    data.forEach(
+        (item,index)=>{
+
+            const status =
+                String(
+                    item.status ||
+                    "baru"
+                ).toLowerCase();
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        ${index+1}
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${escapeHTML(
+                                item.kode
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.nama
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.kategori
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.judul
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.tanggal
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="status status-${status}"
+                        >
+
+                            ${escapeHTML(
+                                status
+                            )}
+
+                        </span>
+
+                    </td>
+
+
+                    <td class="action-cell">
+
+                        <a
+                            class="detail-btn"
+                            href="detail-pengaduan.html?id=${encodeURIComponent(
+                                item.id
+                            )}"
+                        >
+                            👁 Detail
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    wrapper.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+document.getElementById(
+    "filterStatus"
+).addEventListener(
+    "change",
+    renderTable
+);
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "input",
+    renderTable
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadData();
+
 </script>
 
 </body>

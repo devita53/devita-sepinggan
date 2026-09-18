@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Detail Pengaduan — Dusun Sepinggan Gelik</title>
+
+<style>
+
+:root{
+    --biru-tua:#0b3d91;
+    --biru-med:#2b7de9;
+    --biru-muda:#e8f0fc;
+    --biru-cerah:#69b1ff;
+    --putih:#fff;
+    --abu-lembut:#f0f4fc;
+    --teks:#1a2b48;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:var(--biru-muda);
+    color:var(--teks);
+    line-height:1.7;
+}
+
+header{
+    background:
+        linear-gradient(
+            135deg,
+            var(--biru-tua),
+            var(--biru-med)
+        );
+    color:white;
+    padding:1rem 5%;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+.nav a{
+    color:white;
+    text-decoration:none;
+    background:rgba(255,255,255,.18);
+    padding:.5rem .9rem;
+    border-radius:7px;
+}
+
+main{
+    max-width:1000px;
+    margin:auto;
+    padding:3rem 5%;
+}
+
+.panel{
+    background:white;
+    border-radius:14px;
+    padding:2rem;
+    box-shadow:
+        0 8px 25px rgba(11,61,145,.10);
+    margin-bottom:1.5rem;
+}
+
+h1{
+    color:var(--biru-tua);
+    margin-bottom:1.5rem;
+    font-size:1.8rem;
+}
+
+h2{
+    color:var(--biru-tua);
+    font-size:1.2rem;
+    margin-bottom:1rem;
+}
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
+    gap:1rem;
+}
+
+.detail{
+    background:var(--abu-lembut);
+    border:1px solid #d4e2fc;
+    border-radius:9px;
+    padding:1rem;
+}
+
+.detail small{
+    display:block;
+    color:#68778d;
+}
+
+.detail strong{
+    color:var(--biru-tua);
+    word-break:break-word;
+}
+
+.content{
+    background:var(--abu-lembut);
+    border:1px solid #d4e2fc;
+    border-radius:9px;
+    padding:1rem;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.form-group{
+    margin-bottom:1.2rem;
+}
+
+label{
+    display:block;
+    font-weight:600;
+    color:var(--biru-tua);
+    margin-bottom:.4rem;
+}
+
+select,
+textarea{
+    width:100%;
+    padding:.8rem 1rem;
+    border:1px solid #cbd9ef;
+    border-radius:9px;
+    font-family:inherit;
+    font-size:1rem;
+    outline:none;
+}
+
+select:focus,
+textarea:focus{
+    border-color:var(--biru-med);
+    box-shadow:0 0 0 3px rgba(43,125,233,.12);
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.actions{
+    display:flex;
+    gap:.7rem;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    padding:.75rem 1.3rem;
+    border-radius:50px;
+    background:var(--biru-tua);
+    color:white;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:600;
+}
+
+.btn:hover{
+    background:var(--biru-med);
+    transform:translateY(-1px);
+}
+
+.btn-danger{
+    background:#b42318;
+}
+
+.btn-danger:hover{
+    background:#8e1c14;
+}
+
+.btn-secondary{
+    background:#e8f0fc;
+    color:var(--biru-tua);
+}
+
+.message{
+    display:none;
+    padding:1rem;
+    border-radius:9px;
+    margin-bottom:1rem;
+}
+
+.message.show{
+    display:block;
+}
+
+.success{
+    background:#d1e7dd;
+    color:#0f5132;
+}
+
+.error{
+    background:#f8d7da;
+    color:#842029;
+}
+
+.loading{
+    text-align:center;
+    padding:2rem;
+    color:var(--biru-tua);
+    font-weight:600;
+}
+
+@media(max-width:600px){
+
+    main{
+        padding:2rem 4%;
+    }
+
+    .panel{
+        padding:1.3rem;
+    }
+
+    .logo{
+        font-size:1rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+            🛠️ Admin Sepinggan Gelik
+        </div>
+
+        <a href="admin.html">
+            ← Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div
+        id="loading"
+        class="panel loading"
+    >
+        ⏳ Memuat pengaduan...
+    </div>
+
+
+    <div
+        id="content"
+        style="display:none;"
+    >
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+
+        <!-- INFORMASI -->
+
+        <div class="panel">
+
+            <h1>
+                Detail Pengaduan
+            </h1>
+
+            <div class="detail-grid">
+
+                <div class="detail">
+
+                    <small>
+                        Kode Pengaduan
+                    </small>
+
+                    <strong id="kode">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Nama
+                    </small>
+
+                    <strong id="nama">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Kontak
+                    </small>
+
+                    <strong id="kontak">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Kategori
+                    </small>
+
+                    <strong id="kategori">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Judul
+                    </small>
+
+                    <strong id="judul">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Lokasi
+                    </small>
+
+                    <strong id="lokasi">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Tanggal
+                    </small>
+
+                    <strong id="tanggal">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <small>
+                        Terakhir Diperbarui
+                    </small>
+
+                    <strong id="diperbarui">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ISI -->
+
+        <div class="panel">
+
+            <h2>
+                Isi Pengaduan
+            </h2>
+
+            <div
+                class="content"
+                id="isi"
+            >
+                -
+            </div>
+
+        </div>
+
+
+        <!-- UPDATE -->
+
+        <div class="panel">
+
+            <h2>
+                Tindakan Admin
+            </h2>
+
+            <form id="updateForm">
+
+                <div class="form-group">
+
+                    <label for="status">
+                        Status Pengaduan
+                    </label>
+
+                    <select
+                        id="status"
+                        required
+                    >
+
+                        <option value="baru">
+                            Baru
+                        </option>
+
+                        <option value="diproses">
+                            Diproses
+                        </option>
+
+                        <option value="selesai">
+                            Selesai
+                        </option>
+
+                        <option value="ditolak">
+                            Ditolak
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="tanggapan">
+                        Tanggapan Admin
+                    </label>
+
+                    <textarea
+                        id="tanggapan"
+                        placeholder="Tulis tanggapan kepada warga..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        type="submit"
+                        class="btn"
+                        id="saveBtn"
+                    >
+                        💾 Simpan Perubahan
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="hapusPengaduan()"
+                    >
+                        🗑️ Hapus Pengaduan
+                    </button>
+
+
+                    <a
+                        href="admin.html"
+                        class="btn btn-secondary"
+                        style="text-decoration:none;"
+                    >
+                        Batal
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+if(
+    sessionStorage.getItem(
+        "adminLogin"
+    ) !== "true"
+){
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   API
+===================================================== */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx1tklJcBaQGLEf5eoKJ2L-xqRlE756KhWGAZip6zOwTeyMbuwYYXNK7e8P8bW_J7q9NA/exec";
+
+
+const params =
+new URLSearchParams(
+    window.location.search
+);
+
+
+const id =
+params.get("id");
+
+
+/* =====================================================
+   JSONP
+===================================================== */
+
+function jsonpRequest(
+    params,
+    timeout=8000,
+    retries=3
+){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            let attempt=0;
+
+
+            function request(){
+
+                attempt++;
+
+
+                const callbackName =
+                    "detailCallback_" +
+                    Date.now() +
+                    "_" +
+                    Math.floor(
+                        Math.random()*100000
+                    );
+
+
+                let script=null;
+                let timer=null;
+                let finished=false;
+
+
+                function cleanup(){
+
+                    if(timer)
+                        clearTimeout(timer);
+
+                    if(script)
+                        script.remove();
+
+                    try{
+                        delete window[
+                            callbackName
+                        ];
+                    }
+                    catch(error){
+                        window[
+                            callbackName
+                        ]=undefined;
+                    }
+
+                }
+
+
+                window[
+                    callbackName
+                ]=function(data){
+
+                    if(finished)
+                        return;
+
+                    finished=true;
+
+                    cleanup();
+
+                    resolve(data);
+
+                };
+
+
+                const query =
+                    new URLSearchParams(
+                        params
+                    );
+
+
+                query.set(
+                    "callback",
+                    callbackName
+                );
+
+                query.set(
+                    "_",
+                    Date.now()
+                );
+
+
+                script =
+                    document.createElement(
+                        "script"
+                    );
+
+
+                script.src =
+                    API_URL +
+                    "?" +
+                    query.toString();
+
+
+                script.onerror=function(){
+
+                    if(finished)
+                        return;
+
+                    finished=true;
+
+                    cleanup();
+
+
+                    if(
+                        attempt <
+                        retries
+                    ){
+
+                        setTimeout(
+                            request,
+                            500
+                        );
+
+                    }
+                    else{
+
+                        reject(
+                            new Error(
+                                "Gagal menghubungi server."
+                            )
+                        );
+
+                    }
+
+                };
+
+
+                timer =
+                    setTimeout(
+                        ()=>{
+
+                            if(finished)
+                                return;
+
+                            finished=true;
+
+                            cleanup();
+
+
+                            if(
+                                attempt <
+                                retries
+                            ){
+
+                                setTimeout(
+                                    request,
+                                    500
+                                );
+
+                            }
+                            else{
+
+                                reject(
+                                    new Error(
+                                        "Server terlalu lama merespons."
+                                    )
+                                );
+
+                            }
+
+                        },
+                        timeout
+                    );
+
+
+                document.body.appendChild(
+                    script
+                );
+
+            }
+
+
+            request();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOAD DETAIL
+===================================================== */
+
+async function loadDetail(){
+
+    if(!id){
+
+        showError(
+            "ID pengaduan tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await jsonpRequest(
+                {
+                    action:"detail",
+                    id:id
+                },
+                8000,
+                3
+            );
+
+
+        if(
+            !result ||
+            !result.success
+        ){
+
+            throw new Error(
+                result?.message ||
+                "Pengaduan tidak ditemukan."
+            );
+
+        }
+
+
+        const data =
+            result.data;
+
+
+        document.getElementById(
+            "kode"
+        ).textContent =
+            data.kode || "-";
+
+
+        document.getElementById(
+            "nama"
+        ).textContent =
+            data.nama || "-";
+
+
+        document.getElementById(
+            "kontak"
+        ).textContent =
+            data.kontak || "-";
+
+
+        document.getElementById(
+            "kategori"
+        ).textContent =
+            data.kategori || "-";
+
+
+        document.getElementById(
+            "judul"
+        ).textContent =
+            data.judul || "-";
+
+
+        document.getElementById(
+            "lokasi"
+        ).textContent =
+            data.lokasi || "-";
+
+
+        document.getElementById(
+            "tanggal"
+        ).textContent =
+            data.tanggal || "-";
+
+
+        document.getElementById(
+            "diperbarui"
+        ).textContent =
+            data.diperbarui || "-";
+
+
+        document.getElementById(
+            "isi"
+        ).textContent =
+            data.isi || "-";
+
+
+        document.getElementById(
+            "status"
+        ).value =
+            data.status || "baru";
+
+
+        document.getElementById(
+            "tanggapan"
+        ).value =
+            data.tanggapan || "";
+
+
+        document.getElementById(
+            "loading"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "content"
+        ).style.display =
+            "block";
+
+    }
+    catch(error){
+
+        showError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(text){
+
+    document.getElementById(
+        "loading"
+    ).innerHTML =
+        "❌ " + text;
+
+}
+
+
+/* =====================================================
+   POST
+===================================================== */
+
+async function postData(
+    data
+){
+
+    const controller =
+        new AbortController();
+
+
+    const timer =
+        setTimeout(
+            () => controller.abort(),
+            10000
+        );
+
+
+    try{
+
+        await fetch(
+            API_URL,
+            {
+                method:"POST",
+                body:new URLSearchParams(
+                    data
+                ),
+                mode:"no-cors",
+                signal:controller.signal
+            }
+        );
+
+
+        return true;
+
+    }
+    finally{
+
+        clearTimeout(
+            timer
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE
+===================================================== */
+
+document.getElementById(
+    "updateForm"
+).addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+
+        const button =
+            document.getElementById(
+                "saveBtn"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "⏳ Menyimpan...";
+
+
+        message.className =
+            "message";
+
+
+        const status =
+            document.getElementById(
+                "status"
+            ).value;
+
+
+        const tanggapan =
+            document.getElementById(
+                "tanggapan"
+            ).value;
+
+
+        try{
+
+            await postData(
+                {
+                    action:"update",
+                    id:id,
+                    status:status,
+                    tanggapan:tanggapan
+                }
+            );
+
+
+            /*
+             * Tunggu sebentar lalu verifikasi
+             * dengan GET JSONP.
+             */
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        800
+                    )
+            );
+
+
+            const result =
+                await jsonpRequest(
+                    {
+                        action:"detail",
+                        id:id
+                    },
+                    8000,
+                    3
+                );
+
+
+            if(
+                !result ||
+                !result.success
+            ){
+
+                throw new Error(
+                    "Perubahan belum dapat diverifikasi."
+                );
+
+            }
+
+
+            if(
+                String(
+                    result.data.status
+                ).toLowerCase() !==
+                status.toLowerCase()
+            ){
+
+                throw new Error(
+                    "Status belum berhasil diperbarui."
+                );
+
+            }
+
+
+            message.textContent =
+                "✅ Pengaduan berhasil diperbarui.";
+
+            message.className =
+                "message show success";
+
+
+            document.getElementById(
+                "diperbarui"
+            ).textContent =
+                result.data.diperbarui ||
+                "-";
+
+        }
+        catch(error){
+
+            message.textContent =
+                error.message ||
+                "Gagal menyimpan perubahan.";
+
+            message.className =
+                "message show error";
+
+        }
+        finally{
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "💾 Simpan Perubahan";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   HAPUS
+===================================================== */
+
+async function hapusPengaduan(){
+
+    const yakin =
+        confirm(
+            "Apakah kamu yakin ingin menghapus pengaduan ini?"
+        );
+
+
+    if(!yakin)
+        return;
+
+
+    try{
+
+        await postData(
+            {
+                action:"hapus",
+                id:id
+            }
+        );
+
+
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    800
+                )
+        );
+
+
+        /*
+         * Pastikan data sudah tidak ada.
+         */
+
+        const result =
+            await jsonpRequest(
+                {
+                    action:"detail",
+                    id:id
+                },
+                8000,
+                3
+            );
+
+
+        if(
+            result &&
+            result.success
+        ){
+
+            throw new Error(
+                "Pengaduan belum berhasil dihapus."
+            );
+
+        }
+
+
+        alert(
+            "Pengaduan berhasil dihapus."
+        );
+
+
+        window.location.href =
+            "admin.html";
+
+    }
+    catch(error){
+
+        alert(
+            error.message ||
+            "Gagal menghapus pengaduan."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadDetail();
+
+</script>
+
+</body>
+</html>
