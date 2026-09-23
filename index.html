@@ -166,16 +166,6 @@
 
             overflow:hidden;
 
-            /*
-                FOTO UTAMA
-
-                Jika foto berada satu folder dengan index.html:
-                foto-dusun.jpg
-
-                Jika nama file berbeda,
-                ubah bagian ini.
-            */
-
             background-image:
                 linear-gradient(
                     135deg,
@@ -183,16 +173,14 @@
                     rgba(11,61,145,.50),
                     rgba(0,0,0,.30)
                 ),
-                url('foto-dusun.jpg');
+                url('sepinggan.jpg');
 
             background-size:cover;
             background-position:center center;
             background-repeat:no-repeat;
         }
 
-        /*
-           Efek lembut pada foto
-        */
+        /* Efek lembut pada foto */
 
         .hero::before{
             content:"";
@@ -210,9 +198,7 @@
             pointer-events:none;
         }
 
-        /*
-           Efek cahaya di bagian bawah
-        */
+        /* Efek cahaya di bagian bawah */
 
         .hero::after{
             content:"";
@@ -622,6 +608,7 @@
 
                 max-width:240px;
             }
+
         }
 
     </style>
