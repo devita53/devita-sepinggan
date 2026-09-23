@@ -4,188 +4,931 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dusun Sepinggan Gelik — Beranda</title>
+
     <style>
-        *{margin:0;padding:0;box-sizing:border-box; font-family:'Segoe UI', sans-serif; scroll-behavior:smooth;}
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', sans-serif;
+            scroll-behavior:smooth;
+        }
+
         :root{
-            --biru-tua:#0b3d91; --biru-med:#2b7de9; --biru-muda:#e8f0fc;
-            --biru-cerah:#69b1ff; --putih:#fff; --abu-lembut:#f0f4fc; --teks:#1a2b48;
+            --biru-tua:#0b3d91;
+            --biru-med:#2b7de9;
+            --biru-muda:#e8f0fc;
+            --biru-cerah:#69b1ff;
+            --putih:#fff;
+            --abu-lembut:#f0f4fc;
+            --teks:#1a2b48;
             --aksen-emas:#d4ac0d;
         }
-        body{background:var(--biru-muda); color:var(--teks); line-height:1.9;}
-        header{background:linear-gradient(135deg,var(--biru-tua),var(--biru-med)); color:var(--putih); padding:1rem 5%; position:sticky; top:0; z-index:999; box-shadow:0 2px 12px rgba(0,0,0,.15);}
-        .nav{max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; position:relative;}
-        .logo{font-size:1.3rem; font-weight:700;}
-        .menu-toggle{display:none; font-size:1.8rem; cursor:pointer; padding:.3rem .8rem; border-radius:6px; background:rgba(255,255,255,.15);}
-        nav ul{display:flex; list-style:none; gap:1.3rem; flex-wrap:wrap; align-items:center;}
-        nav a{color:var(--putih); text-decoration:none; font-weight:500; padding:.5rem 0; border-bottom:2px solid transparent; transition:.3s;}
-        nav a:hover, nav a.active{border-bottom:2px solid var(--putih);}
-        section{max-width:1200px; margin:0 auto; padding:3.5rem 5%;}
-        h2{text-align:center; color:var(--biru-tua); font-size:2rem; margin-bottom:2rem; padding-top:1rem;}
-        h2::after{content:''; display:block; width:90px; height:4px; background:var(--biru-med); margin:.6rem auto 0; border-radius:2px;}
-        
-        .hero{
-            background:linear-gradient(135deg,var(--biru-tua),var(--biru-med)); 
-            min-height:70vh; 
-            display:flex; 
-            align-items:center; 
-            text-align:center; 
-            color:var(--putih); 
-            max-width:100%; 
-            margin:0;
-        }
-        .hero-content{max-width:800px; margin:0 auto; padding:2rem;}
-        .hero h1{font-size:2.6rem; margin-bottom:1.5rem; line-height:1.3;}
-        .hero p{font-size:1.15rem; margin-bottom:2rem;}
-        .btn{display:inline-block; padding:.9rem 2.2rem; background:var(--putih); color:var(--biru-tua); font-weight:600; border-radius:50px; text-decoration:none; transition:.3s; margin:.4rem;}
-        .btn:hover{background:var(--biru-cerah); color:var(--putih); transform:translateY(-3px);}
-        
-        .card{background:var(--putih); border-radius:14px; padding:2rem; box-shadow:0 5px 18px rgba(43,125,233,.13); margin-bottom:1.5rem;}
-        .card h3{color:var(--biru-tua); margin-bottom:1rem; font-size:1.35rem;}
-        .grid-2{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.6rem;}
-        
-        /* ==== Styling Khusus Info Wilayah & Penduduk ==== */
-        .info-wilayah-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px, 1fr)); gap:1.2rem; margin:1.5rem 0;}
-        .info-box{background:var(--abu-lembut); border:1px solid #d4e2fc; border-radius:10px; padding:1.2rem; text-align:center; transition:.3s;}
-        .info-box:hover{transform:translateY(-3px); box-shadow:0 6px 15px rgba(43,125,233,.1);}
-        .info-box .icon{font-size:1.8rem; margin-bottom:.5rem;}
-        .info-box h4{color:var(--biru-tua); font-size:0.95rem; margin-bottom:.3rem;}
-        .info-box p{color:var(--teks); font-size:0.9rem; font-weight:600;}
-        .catatan-penduduk{font-size:.85rem; color:#627494; text-align:center; margin-top:1.2rem; font-style:italic; background:#f7fafe; padding:.8rem; border-radius:8px; border:1px dashed #c7d7f5;}
 
-        .pemisah{height:3px; background:linear-gradient(to right,transparent,var(--biru-med),transparent); border:none; margin:2.5rem auto; max-width:650px;}
-        blockquote{border-left:4px solid var(--biru-med); padding-left:1.3rem; font-style:italic; color:#2c3e50; margin:1.2rem 0;}
-        footer{background:var(--biru-tua); color:var(--putih); text-align:center; padding:2.2rem 5%; margin-top:2rem;}
-        
-        @media(max-width:768px){
-            .menu-toggle{display:block;}
-            nav ul{position:absolute; top:100%; left:0; right:0; flex-direction:column; background:var(--biru-tua); padding:1.2rem 1.5rem; gap:1rem; display:none; border-radius:0 0 14px 14px; box-shadow:0 8px 16px rgba(0,0,0,.15); z-index:998;}
-            nav ul.active{display:flex;}
-            .hero h1{font-size:1.8rem;}
+        body{
+            background:var(--biru-muda);
+            color:var(--teks);
+            line-height:1.9;
+            overflow-x:hidden;
         }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header{
+            background:linear-gradient(
+                135deg,
+                var(--biru-tua),
+                var(--biru-med)
+            );
+
+            color:var(--putih);
+            padding:1rem 5%;
+
+            position:sticky;
+            top:0;
+            z-index:999;
+
+            box-shadow:0 3px 15px rgba(0,0,0,.18);
+
+            backdrop-filter:blur(10px);
+        }
+
+        .nav{
+            max-width:1200px;
+            margin:0 auto;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            flex-wrap:wrap;
+            position:relative;
+        }
+
+        .logo{
+            font-size:1.3rem;
+            font-weight:700;
+            letter-spacing:.2px;
+        }
+
+        .menu-toggle{
+            display:none;
+            font-size:1.8rem;
+            cursor:pointer;
+            padding:.3rem .8rem;
+            border-radius:6px;
+            background:rgba(255,255,255,.15);
+        }
+
+        nav ul{
+            display:flex;
+            list-style:none;
+            gap:1.3rem;
+            flex-wrap:wrap;
+            align-items:center;
+        }
+
+        nav a{
+            color:var(--putih);
+            text-decoration:none;
+            font-weight:500;
+
+            padding:.5rem 0;
+
+            border-bottom:2px solid transparent;
+
+            transition:.3s;
+        }
+
+        nav a:hover,
+        nav a.active{
+            border-bottom:2px solid var(--putih);
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        section{
+            max-width:1200px;
+            margin:0 auto;
+            padding:3.5rem 5%;
+        }
+
+        h2{
+            text-align:center;
+            color:var(--biru-tua);
+
+            font-size:2rem;
+            margin-bottom:2rem;
+            padding-top:1rem;
+        }
+
+        h2::after{
+            content:'';
+            display:block;
+
+            width:90px;
+            height:4px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    var(--biru-med),
+                    var(--biru-cerah)
+                );
+
+            margin:.6rem auto 0;
+            border-radius:2px;
+        }
+
+        /* =========================
+           HERO DENGAN FOTO
+        ========================= */
+
+        .hero{
+            position:relative;
+
+            min-height:78vh;
+
+            max-width:100%;
+            margin:0;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            text-align:center;
+
+            color:var(--putih);
+
+            overflow:hidden;
+
+            /*
+                FOTO UTAMA
+
+                Jika foto berada satu folder dengan index.html:
+                foto-dusun.jpg
+
+                Jika nama file berbeda,
+                ubah bagian ini.
+            */
+
+            background-image:
+                linear-gradient(
+                    135deg,
+                    rgba(5,35,90,.78),
+                    rgba(11,61,145,.50),
+                    rgba(0,0,0,.30)
+                ),
+                url('foto-dusun.jpg');
+
+            background-size:cover;
+            background-position:center center;
+            background-repeat:no-repeat;
+        }
+
+        /*
+           Efek lembut pada foto
+        */
+
+        .hero::before{
+            content:"";
+
+            position:absolute;
+            inset:0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.05),
+                    rgba(0,0,0,.15)
+                );
+
+            pointer-events:none;
+        }
+
+        /*
+           Efek cahaya di bagian bawah
+        */
+
+        .hero::after{
+            content:"";
+
+            position:absolute;
+
+            left:0;
+            right:0;
+            bottom:0;
+
+            height:180px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(11,61,145,.35),
+                    transparent
+                );
+
+            pointer-events:none;
+        }
+
+        .hero-content{
+            position:relative;
+            z-index:5;
+
+            max-width:900px;
+            margin:0 auto;
+
+            padding:3rem 2rem;
+
+            animation:heroMasuk 1.2s ease;
+        }
+
+        @keyframes heroMasuk{
+
+            from{
+                opacity:0;
+                transform:translateY(25px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+
+        }
+
+        .hero h1{
+            font-size:2.8rem;
+
+            margin-bottom:1.5rem;
+
+            line-height:1.3;
+
+            text-shadow:
+                0 3px 12px rgba(0,0,0,.55);
+        }
+
+        .hero p{
+            font-size:1.1rem;
+
+            margin-bottom:2rem;
+
+            text-shadow:
+                0 2px 8px rgba(0,0,0,.55);
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .btn{
+            display:inline-block;
+
+            padding:.9rem 2.2rem;
+
+            background:rgba(255,255,255,.95);
+
+            color:var(--biru-tua);
+
+            font-weight:600;
+
+            border-radius:50px;
+
+            text-decoration:none;
+
+            transition:.3s;
+
+            margin:.4rem;
+
+            box-shadow:
+                0 6px 20px rgba(0,0,0,.22);
+        }
+
+        .btn:hover{
+            background:var(--biru-cerah);
+
+            color:var(--putih);
+
+            transform:translateY(-4px);
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,.28);
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card{
+            background:rgba(255,255,255,.97);
+
+            border-radius:16px;
+
+            padding:2rem;
+
+            box-shadow:
+                0 6px 20px rgba(43,125,233,.13);
+
+            margin-bottom:1.5rem;
+
+            border:1px solid rgba(255,255,255,.8);
+
+            transition:.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-4px);
+
+            box-shadow:
+                0 12px 28px rgba(43,125,233,.18);
+        }
+
+        .card h3{
+            color:var(--biru-tua);
+
+            margin-bottom:1rem;
+
+            font-size:1.35rem;
+        }
+
+        .grid-2{
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(280px,1fr));
+
+            gap:1.6rem;
+        }
+
+        /* =========================
+           INFO WILAYAH
+        ========================= */
+
+        .info-wilayah-grid{
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(220px,1fr));
+
+            gap:1.2rem;
+
+            margin:1.5rem 0;
+        }
+
+        .info-box{
+            background:
+                linear-gradient(
+                    145deg,
+                    #f8fbff,
+                    #edf4ff
+                );
+
+            border:1px solid #d4e2fc;
+
+            border-radius:14px;
+
+            padding:1.2rem;
+
+            text-align:center;
+
+            transition:.3s;
+        }
+
+        .info-box:hover{
+            transform:translateY(-4px);
+
+            box-shadow:
+                0 8px 18px rgba(43,125,233,.12);
+        }
+
+        .info-box .icon{
+            font-size:1.8rem;
+
+            margin-bottom:.5rem;
+        }
+
+        .info-box h4{
+            color:var(--biru-tua);
+
+            font-size:.95rem;
+
+            margin-bottom:.3rem;
+        }
+
+        .info-box p{
+            color:var(--teks);
+
+            font-size:.9rem;
+
+            font-weight:600;
+        }
+
+        .catatan-penduduk{
+            font-size:.85rem;
+
+            color:#627494;
+
+            text-align:center;
+
+            margin-top:1.2rem;
+
+            font-style:italic;
+
+            background:#f7fafe;
+
+            padding:.8rem;
+
+            border-radius:8px;
+
+            border:1px dashed #c7d7f5;
+        }
+
+        /* =========================
+           PEMISAH
+        ========================= */
+
+        .pemisah{
+            height:3px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    transparent,
+                    var(--biru-med),
+                    transparent
+                );
+
+            border:none;
+
+            margin:2.5rem auto;
+
+            max-width:650px;
+        }
+
+        /* =========================
+           QUOTE
+        ========================= */
+
+        blockquote{
+            border-left:4px solid var(--biru-med);
+
+            padding-left:1.3rem;
+
+            font-style:italic;
+
+            color:#2c3e50;
+
+            margin:1.2rem 0;
+
+            background:rgba(255,255,255,.45);
+
+            padding-top:1rem;
+            padding-bottom:1rem;
+
+            border-radius:0 10px 10px 0;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer{
+            background:
+                linear-gradient(
+                    135deg,
+                    #082f72,
+                    var(--biru-tua)
+                );
+
+            color:var(--putih);
+
+            text-align:center;
+
+            padding:2.2rem 5%;
+
+            margin-top:2rem;
+        }
+
+        footer p{
+            margin:.3rem 0;
+        }
+
+        /* =========================
+           RESPONSIVE HP
+        ========================= */
+
+        @media(max-width:768px){
+
+            header{
+                padding:.85rem 5%;
+            }
+
+            .menu-toggle{
+                display:block;
+            }
+
+            nav ul{
+                position:absolute;
+
+                top:100%;
+                left:0;
+                right:0;
+
+                flex-direction:column;
+
+                background:var(--biru-tua);
+
+                padding:1.2rem 1.5rem;
+
+                gap:1rem;
+
+                display:none;
+
+                border-radius:0 0 14px 14px;
+
+                box-shadow:
+                    0 8px 16px rgba(0,0,0,.15);
+
+                z-index:998;
+            }
+
+            nav ul.active{
+                display:flex;
+            }
+
+            .hero{
+                min-height:82vh;
+
+                background-position:center center;
+            }
+
+            .hero-content{
+                padding:2rem 1.2rem;
+            }
+
+            .hero h1{
+                font-size:1.85rem;
+            }
+
+            .hero p{
+                font-size:.95rem;
+                line-height:1.8;
+            }
+
+            .btn{
+                padding:.8rem 1.5rem;
+                font-size:.9rem;
+            }
+
+            section{
+                padding:2.8rem 5%;
+            }
+
+            h2{
+                font-size:1.6rem;
+            }
+        }
+
+        /* =========================
+           HP KECIL
+        ========================= */
+
+        @media(max-width:480px){
+
+            .logo{
+                font-size:1.05rem;
+            }
+
+            .hero{
+                min-height:88vh;
+            }
+
+            .hero h1{
+                font-size:1.55rem;
+            }
+
+            .hero p{
+                font-size:.88rem;
+            }
+
+            .btn{
+                display:block;
+
+                margin:.55rem auto;
+
+                max-width:240px;
+            }
+        }
+
     </style>
 </head>
+
 <body>
+
 <header>
+
     <div class="nav">
-        <div class="logo">🏡 Sepinggan Gelik</div>
+
+        <div class="logo">
+            🏡 Sepinggan Gelik
+        </div>
+
         <nav>
-            <div class="menu-toggle" id="menuToggle">☰</div>
+
+            <div class="menu-toggle" id="menuToggle">
+                ☰
+            </div>
+
             <ul id="navMenu">
-                <li><a href="index.html" class="active">Beranda</a></li>
-                <li><a href="sejarah.html">Sejarah</a></li>
-                <li><a href="potensi.html">Potensi</a></li>
-                <li><a href="kegiatan.html">Kegiatan & Galeri</a></li>
-                <li><a href="kontak.html">Pesan & Kontak</a></li>
 
                 <li>
-    <a href="pengaduan.html"
-       style="
-           background:#d4ac0d;
-           padding:0.4rem 0.9rem;
-           border-radius:6px;
-           font-weight:600;
-           text-decoration:none;
-       ">
-        📢 Layanan Warga
-    </a>
-</li>
+                    <a href="index.html" class="active">
+                        Beranda
+                    </a>
+                </li>
 
-<li>
-    <a href="login.html"
-       style="
-           background:#dc3545;
-           padding:0.4rem 0.9rem;
-           border-radius:6px;
-           font-weight:600;
-           text-decoration:none;
-       ">
-        🛠️ Admin
-    </a>
-</li>
+                <li>
+                    <a href="sejarah.html">
+                        Sejarah
+                    </a>
+                </li>
+
+                <li>
+                    <a href="potensi.html">
+                        Potensi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="kegiatan.html">
+                        Kegiatan & Galeri
+                    </a>
+                </li>
+
+                <li>
+                    <a href="kontak.html">
+                        Pesan & Kontak
+                    </a>
+                </li>
+
+                <li>
+                    <a href="pengaduan.html"
+                       style="
+                           background:#d4ac0d;
+                           padding:0.4rem 0.9rem;
+                           border-radius:6px;
+                           font-weight:600;
+                           text-decoration:none;
+                       ">
+                        📢 Layanan Warga
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login.html"
+                       style="
+                           background:#dc3545;
+                           padding:0.4rem 0.9rem;
+                           border-radius:6px;
+                           font-weight:600;
+                           text-decoration:none;
+                       ">
+                        🛠️ Admin
+                    </a>
+                </li>
+
+            </ul>
 
         </nav>
+
     </div>
+
 </header>
 
+
+<!-- =========================
+     BERANDA
+========================= -->
+
 <section class="hero" id="beranda">
+
     <div class="hero-content">
-        <h1>Selamat Datang di<br>Dusun Sepinggan Gelik</h1>
-        <p>Di sudut bumi Kabupaten Sambas yang penuh berkah, terhampar sebuah dusun yang tenang, asri, dan ramah tamah. Dikelilingi hamparan sawah yang membentang luas, disapa lembut angin yang membawa aroma tanah basah, serta dihuni oleh keluarga-keluarga yang hidup rukun dan saling menyayangi. Inilah Sepinggan Gelik — tempat di mana kesederhanaan menjadi keindahan, dan kebersamaan menjadi kekuatan yang tak tergantikan.</p>
-        <a href="sejarah.html" class="btn">📜 Sejarah Dusun</a>
-        <a href="kontak.html" class="btn">📍 Temukan Kami</a>
+
+        <h1>
+            Selamat Datang di<br>
+            Dusun Sepinggan Gelik
+        </h1>
+
+        <p>
+            Di sudut bumi Kabupaten Sambas yang penuh berkah, terhampar sebuah dusun yang tenang, asri, dan ramah tamah. Dikelilingi hamparan sawah yang membentang luas, disapa lembut angin yang membawa aroma tanah basah, serta dihuni oleh keluarga-keluarga yang hidup rukun dan saling menyayangi. Inilah Sepinggan Gelik — tempat di mana kesederhanaan menjadi keindahan, dan kebersamaan menjadi kekuatan yang tak tergantikan.
+        </p>
+
+        <a href="sejarah.html" class="btn">
+            📜 Sejarah Dusun
+        </a>
+
+        <a href="kontak.html" class="btn">
+            📍 Temukan Kami
+        </a>
+
     </div>
+
 </section>
+
 
 <hr class="pemisah">
 
+
 <section id="tentang">
-    <h2>🌿 Mengenal Lebih Dekat Dusun Sepinggan Gelik</h2>
+
+    <h2>
+        🌿 Mengenal Lebih Dekat Dusun Sepinggan Gelik
+    </h2>
+
+
     <div class="grid-2">
+
         <!-- KARTU 1: LOKASI & ALAM -->
+
         <div class="card">
-            <h3>📍 Suasana & Lingkungan</h3>
-            <p>Terletak di jalur yang mudah dijangkau, namun tetap menjaga suasana pedesaan yang tenang dan damai — jauh dari kebisingan kota, namun dekat dengan kehangatan sesama warga.</p>
-            <p style="margin-top: 1rem;">Wilayah ini dikelilingi oleh hamparan sawah yang luas, aliran sungai yang jernih, serta pepohonan yang rindang meneduhkan setiap jengkal tanahnya. Udara pagi yang sejuk, pemandangan hijau yang menenangkan mata, serta langit yang bersih dari polusi adalah anugerah yang kami nikmati setiap hari.</p>
+
+            <h3>
+                📍 Suasana & Lingkungan
+            </h3>
+
+            <p>
+                Terletak di jalur yang mudah dijangkau, namun tetap menjaga suasana pedesaan yang tenang dan damai — jauh dari kebisingan kota, namun dekat dengan kehangatan sesama warga.
+            </p>
+
+            <p style="margin-top: 1rem;">
+                Wilayah ini dikelilingi oleh hamparan sawah yang luas, aliran sungai yang jernih, serta pepohonan yang rindang meneduhkan setiap jengkal tanahnya. Udara pagi yang sejuk, pemandangan hijau yang menenangkan mata, serta langit yang bersih dari polusi adalah anugerah yang kami nikmati setiap hari.
+            </p>
+
         </div>
+
 
         <!-- KARTU 2: WARGA -->
+
         <div class="card">
-            <h3>👥 Siapa Warga Kami?</h3>
-            <p>Warga Sepinggan Gelik adalah masyarakat yang sederhana, jujur, dan pekerja keras. Sebagian besar bermata pencaharian sebagai petani yang mencintai tanahnya, sebagian lagi berkebun, beternak, atau berdagang kecil-kecilan.</p>
-            <p style="margin-top: 1rem;">Nilai kekeluargaan sangat terjaga di sini. Tetangga bukan sekadar orang yang tinggal berdampingan, melainkan saudara yang saling peduli saat susah maupun senang dalam ikatan gotong royong.</p>
+
+            <h3>
+                👥 Siapa Warga Kami?
+            </h3>
+
+            <p>
+                Warga Sepinggan Gelik adalah masyarakat yang sederhana, jujur, dan pekerja keras. Sebagian besar bermata pencaharian sebagai petani yang mencintai tanahnya, sebagian lagi berkebun, beternak, atau berdagang kecil-kecilan.
+            </p>
+
+            <p style="margin-top: 1rem;">
+                Nilai kekeluargaan sangat terjaga di sini. Tetangga bukan sekadar orang yang tinggal berdampingan, melainkan saudara yang saling peduli saat susah maupun senang dalam ikatan gotong royong.
+            </p>
+
         </div>
+
     </div>
 
-    <!-- KARTU 3: INFORMASI WILAYAH & PENDUDUK (GABUNGAN LENGKAP & RAPI) -->
+
+    <!-- KARTU 3: INFORMASI WILAYAH & PENDUDUK -->
+
     <div class="card" style="margin-top: 1.5rem;">
-        <h3>📊 Informasi Wilayah & Kependudukan</h3>
-        <p><strong>Alamat Administratif:</strong> Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Provinsi Kalimantan Barat — Kode Pos 79453.</p>
-        <p style="margin-top: .8rem; font-size: 0.95rem; color: #556580;">Dusun Sepinggan Gelik merupakan salah satu dari beberapa dusun di Desa Sepinggan, berdampingan dengan wilayah dusun lainnya seperti Sepinggan Kecil, Sepinggan Besar, Sepinggan Jirak, dan Sepinggan Suka Mantri.</p>
-        
+
+        <h3>
+            📊 Informasi Wilayah & Kependudukan
+        </h3>
+
+        <p>
+            <strong>Alamat Administratif:</strong>
+            Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Provinsi Kalimantan Barat — Kode Pos 79453.
+        </p>
+
+        <p style="margin-top: .8rem; font-size: 0.95rem; color: #556580;">
+            Dusun Sepinggan Gelik merupakan salah satu dari beberapa dusun di Desa Sepinggan, berdampingan dengan wilayah dusun lainnya seperti Sepinggan Kecil, Sepinggan Besar, Sepinggan Jirak, dan Sepinggan Suka Mantri.
+        </p>
+
+
         <div class="info-wilayah-grid">
+
             <div class="info-box">
-                <div class="icon">🏛️</div>
-                <h4>Administrasi Desa</h4>
-                <p>Desa Sepinggan, Kec. Semparuk</p>
+
+                <div class="icon">
+                    🏛️
+                </div>
+
+                <h4>
+                    Administrasi Desa
+                </h4>
+
+                <p>
+                    Desa Sepinggan, Kec. Semparuk
+                </p>
+
             </div>
+
+
             <div class="info-box">
-                <div class="icon">📍</div>
-                <h4>Wilayah</h4>
-                <p>Kab. Sambas, Kalimantan Barat</p>
+
+                <div class="icon">
+                    📍
+                </div>
+
+                <h4>
+                    Wilayah
+                </h4>
+
+                <p>
+                    Kab. Sambas, Kalimantan Barat
+                </p>
+
             </div>
+
+
             <div class="info-box">
-                <div class="icon">👥</div>
-                <h4>Estimasi Penduduk</h4>
-                <p>± 1.250 Jiwa</p>
+
+                <div class="icon">
+                    👥
+                </div>
+
+                <h4>
+                    Estimasi Penduduk
+                </h4>
+
+                <p>
+                    ± 1.250 Jiwa
+                </p>
+
             </div>
+
         </div>
+
 
         <div class="catatan-penduduk">
+
             "Data tingkat dusun merupakan angka estimasi berdasarkan total penduduk Desa Sepinggan (6.240 jiwa - Disdukcapil Sambas). Untuk data jumlah penduduk yang paling akurat dan mutakhir hingga tingkat RT/RW, silakan tanyakan langsung melalui perangkat desa di Kantor Desa Sepinggan."
+
         </div>
+
     </div>
 
-    <blockquote>"Kami mungkin tidak hidup mewah seperti di kota besar, tapi kami hidup kaya dengan kebersamaan, sehat dengan alam yang terjaga, dan bahagia dengan kesederhanaan yang kami miliki." — Ungkapan hati warga Sepinggan Gelik</blockquote>
+
+    <blockquote>
+
+        "Kami mungkin tidak hidup mewah seperti di kota besar, tapi kami hidup kaya dengan kebersamaan, sehat dengan alam yang terjaga, dan bahagia dengan kesederhanaan yang kami miliki."
+        — Ungkapan hati warga Sepinggan Gelik
+
+    </blockquote>
+
 </section>
 
+
 <footer>
-    <p><strong>&copy; 2026 Dusun Sepinggan Gelik</strong></p>
-    <p>Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Kalimantan Barat — Kode Pos 79453</p>
+
+    <p>
+        <strong>
+            &copy; 2026 Dusun Sepinggan Gelik
+        </strong>
+    </p>
+
+    <p>
+        Dusun Sepinggan Gelik, Desa Sepinggan, Kecamatan Semparuk, Kabupaten Sambas, Kalimantan Barat — Kode Pos 79453
+    </p>
+
 </footer>
 
+
 <script>
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
 
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
+    const menuToggle =
+        document.getElementById('menuToggle');
 
-document.addEventListener('click', (e) => {
-    if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-    }
-});
+    const navMenu =
+        document.getElementById('navMenu');
+
+
+    menuToggle.addEventListener('click', () => {
+
+        navMenu.classList.toggle('active');
+
+    });
+
+
+    document.addEventListener('click', (e) => {
+
+        if (
+            !menuToggle.contains(e.target) &&
+            !navMenu.contains(e.target)
+        ) {
+
+            navMenu.classList.remove('active');
+
+        }
+
+    });
+
 </script>
+
 </body>
 </html>
